@@ -1,5 +1,5 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark red lighten-1" [containerInside]="false">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark red darken-2" [containerInside]="false">
 
     <!-- Navbar brand -->
     <mdb-navbar-brand><a class="navbar-brand" href="#">Don't Stop! Auto Service Manager</a></mdb-navbar-brand>
@@ -15,8 +15,7 @@
 
             <!-- Dropdown -->
             <li class="nav-item dropdown mx-2" dropdown>
-                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                    mdbWavesEffect>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
                     Statistics<span class="caret"></span></a>
                 <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
                     <!-- *ngFor directive here, displaying current user's car statistic pages -->
@@ -30,8 +29,7 @@
 
             <!-- Dropdown -->
             <li class="nav-item dropdown mx-2" dropdown>
-                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                    mdbWavesEffect>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
                     Vehicles<span class="caret"></span></a>
                 <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
                     <!-- *ngFor directive here, displaying current user's car profiles -->
@@ -51,9 +49,9 @@
                 <a class="nav-link">1 <mdb-icon fas icon="envelope"></mdb-icon></a>
             </li>
             <li class="nav-item avatar dropdown" dropdown>
-                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                    mdbWavesEffect>
-                    <mdb-icon fas icon="user"></mdb-icon></a>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                    <mdb-icon fas icon="user"></mdb-icon>
+                </a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
                     <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/profile">My Profile</a>
                     <!-- *Implement logout feature -->
