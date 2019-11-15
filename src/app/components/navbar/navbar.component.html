@@ -1,8 +1,8 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark red darken-2" [containerInside]="false">
+<mdb-navbar [hidden]="!this.loginService.currentUser" SideClass="navbar navbar-expand-lg navbar-dark unique-color " [containerInside]="false">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">Don't Stop! Auto Service Manager</a></mdb-navbar-brand>
+    <mdb-navbar-brand><a class="navbar-brand" href="#">Don't Stop!</a></mdb-navbar-brand>
 
     <!-- Collapsible content -->
     <links>
@@ -55,7 +55,7 @@
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
                     <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/profile">My Profile</a>
                     <!-- *Implement logout feature -->
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/login">Log out</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/login" (click)="logout()">Log out</a>
                 </div>
             </li>
         </ul>

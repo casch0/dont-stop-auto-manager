@@ -1,5 +1,5 @@
-<div class="container login-container" id="bigCont" style="text-align: center;">
-    <div class="col-md-4 login-form-1" id="cont">
+<div class="container-fluid" style="text-align: center;">
+    <div class="col-md-4" id="cont">
         <img src="../assets/logo.png" alt="logo" class="logo">
         <div class="form-group">
             <input type="email" [(ngModel)]="inputEmail" class="form-control" placeholder="Email" value="" />
@@ -8,7 +8,7 @@
             <input type="password" [(ngModel)]="inputPassword" class="form-control" placeholder="Password" value="" />
         </div>
         <div class="form-group">
-            <input type="submit" [disabled]="!inputPassword || !inputEmail" class="btn btn-light" value="Login" />
+            <input type="submit" [disabled]="!inputPassword || !inputEmail" class="btn btn-light" value="Login" (click)="loginSuccess()" />
             <input type="submit" class="btn btn-light" value="Signup" />
         </div>
         <div class="form-group">
