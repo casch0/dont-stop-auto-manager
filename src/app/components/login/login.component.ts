@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,19 +8,25 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  inputEmail = '';
-  inputPassword = '';
+  loginForm: FormGroup;
 
   constructor(
     private loginService: LoginService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: '',
+      password: '',
+    });
   }
 
-  loginSuccess(){
-    this.loginService.login();
-    this.loginService.currentUser = true;
-    console.log(this.loginService.currentUser);
+  signup(){
+    //signup submit in modal
+  }
+
+  onSubmit(){
+    this.loginService.login(this.loginForm.value['email'], this.loginForm.value['password']);
   }
 }

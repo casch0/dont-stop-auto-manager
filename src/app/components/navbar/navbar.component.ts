@@ -16,7 +16,6 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(){
-    console.log("before: " + this.loginService.currentUser);
-    this.loginService.currentUser = false;
+    this.loginService.currentUser = null;
   }
 }
