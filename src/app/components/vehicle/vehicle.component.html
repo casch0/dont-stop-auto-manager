@@ -10,11 +10,11 @@
                 <section class="card mb-4">
                     <div class="card-body text-center">
 
-                        <h5><strong>Upcoming events</strong></h5>
+                        <h5><strong>Upcoming Services</strong></h5>
 
                     </div>
                 </section>
-                
+
             </div>
             <!-- Grid column -->
 
@@ -22,24 +22,34 @@
             <div class="col-lg-4 col-md-6 text-center">
 
                 <!-- Section: Basic Info -->
-                <section class="card profile-card mb-4 text-center">
+                <section class="card profile-card mb-4">
                     <div class="avatar z-depth-1-half">
                         <img src="/assets/car-default.png" alt="profile pic"
                             class="img-responsive rounded fit-image img-fluid">
                     </div>
                     <!-- Card content -->
-                    <div class="card-body">
-                        <!-- Title -->
-                        <h4 class="card-title"><strong>CAR-NAME</strong></h4>
-                        <h5>Vehicle<a href="">MDBootstrap</a></h5>
-                        <p class="dark-grey-text">CAR-INFO</p>
-                            <ul>
-                                <li>Year:</li>
-                                <li>Model:</li>
-                                <li>Make:</li>
-                                <li>VIN:</li>
-                            </ul>
 
+                    <h4 class="card-title mt-3"><strong>CAR-NAME</strong></h4>
+                    <p class="dark-grey-text mb-1">Vehicle Details</p>
+
+                    <div class="row pt-1 card-body">
+                        <div class="col-3">
+                            <ul class="pl-0" style="list-style-type: none; text-align: left;">
+                                <li>Year</li>
+                                <li>Make</li>
+                                <li>Model</li>
+                                <li>VIN</li>
+                            </ul>
+                        </div>
+
+                        <div class="col-9">
+                            <ul class="pl-0" style="list-style-type: none; text-align: left;">
+                                <li>{{vehicle?.year}}</li>
+                                <li>{{vehicle?.make}}</li>
+                                <li>{{vehicle?.model}}</li>
+                                <li>{{vehicle?.VIN}}</li>
+                            </ul>
+                        </div>
                     </div>
 
                 </section>
@@ -55,11 +65,11 @@
                 <section class="card mb-4">
                     <div class="card-body text-center">
 
-                        <h5><strong>Past events</strong></h5>
+                        <h5><strong>Service History</strong></h5>
 
                     </div>
                 </section>
-                
+
 
             </div>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private loginService: LoginService, 
-    private router: Router
+    private router: Router,
+    private vehicleService: VehicleService
   ) { }
 
   ngOnInit() {
@@ -21,8 +23,9 @@ export class NavbarComponent implements OnInit {
     this.loginService.currentUser = null;
   }
 
-  gotoVehicle(id: number){
-    console.log("Test if sending vehicle url")
+  async gotoVehicle(id: number){
+    console.log("Test if sending vehicle url");
+    await this.vehicleService.setCurrentVehicle(id);
     this.router.navigate(['/vehicle/' + id]);
   }
 }

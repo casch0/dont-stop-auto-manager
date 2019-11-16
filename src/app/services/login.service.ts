@@ -22,7 +22,7 @@ export class LoginService {
   ) { }
 
   async login(email: String, pass: String){
-    //need to check DB for user
+
     this.currentUser = await this.getUser(email);
     console.log(this.currentUser);
 

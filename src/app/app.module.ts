@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { VehicleService } from './services/vehicle.service';
+import { ServiceItemService } from './services/service-item.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,7 @@ import { Router } from '@angular/router';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [LoginService],
+  providers: [LoginService, VehicleService, ServiceItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
