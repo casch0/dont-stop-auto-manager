@@ -26,11 +26,13 @@ export class LoginService {
     this.currentUser = await this.getUser(email);
     console.log(this.currentUser);
 
-    if (this.currentUser['email']){
-      this.router.navigate(['profile']);
+    if (this.currentUser){
+      const url = 'profile/' + email;
+      console.log("this is the url: " + url);
+      this.router.navigate([url]);
+    }else{
+      console.log('invalid user');
     }
-    
-    console.log('invalid user');
   }
 
   checkOnline(){

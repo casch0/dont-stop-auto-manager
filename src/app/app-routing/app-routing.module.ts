@@ -7,8 +7,8 @@ import { VehicleComponent } from '../components/vehicle/vehicle.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'vehicle', component: VehicleComponent },
+  { path: 'profile/:id', component: ProfileComponent },
+  { path: 'vehicle/:id', component: VehicleComponent },
   { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 

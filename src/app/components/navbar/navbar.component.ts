@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +10,19 @@ import { LoginService } from 'src/app/services/login.service';
 export class NavbarComponent implements OnInit {
 
   constructor(
-    private loginService: LoginService,
+    private loginService: LoginService, 
+    private router: Router
   ) { }
 
   ngOnInit() {
   }
 
-  logout(){
+  logout() {
     this.loginService.currentUser = null;
+  }
+
+  gotoVehicle(id: number){
+    console.log("Test if sending vehicle url")
+    this.router.navigate(['/vehicle/' + id]);
   }
 }
