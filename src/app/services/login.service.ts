@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
@@ -11,8 +10,10 @@ import { User } from '../models/user';
 export class LoginService {
   currentUser: User;
   usersUrl = 'api/users';
+  profileURL: String;
 
-  ngOnInit(){
+
+  ngOnInit() {
     this.currentUser = null;
   }
 
@@ -21,31 +22,31 @@ export class LoginService {
     private http: HttpClient,
   ) { }
 
-  async login(email: String, pass: String){
+  async login(email: String, pass: String) {
+    this.currentUser = <User>await this.getUser(email) //should be login(user, pass) when integrated
+      .catch(() => window.alert('invalid user'));
 
-    this.currentUser = await this.getUser(email);
-    console.log(this.currentUser);
-
-    if (this.currentUser){
-      const url = 'profile/' + email;
-      console.log("this is the url: " + url);
-      this.router.navigate([url]);
-    }else{
-      console.log('invalid user');
+    if (this.currentUser) {
+      this.profileURL = '/profile/' + this.currentUser.id;
+      this.router.navigate([this.profileURL]);
     }
   }
 
-  checkOnline(){
-    if(!this.currentUser){
+  checkOnline() {
+    if (!this.currentUser) {
       this.router.navigate(['login']);
     }
   }
 
-  async getUser(id: String){
+  async getUser(id: String) {
     return this.http.get<User>(`${this.usersUrl}/${id}`).toPromise();
   }
 
+  //TODO 
+  // use for real login authentication server side
+  //
   // async loginUser(username: string, password: string) {
   //   return this.http.post<User>(`${this.usersUrl}`, { "username": `${username}`, "password": `${password}` }).toPromise();
   // }
+
 }

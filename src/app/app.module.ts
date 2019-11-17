@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { VehicleService } from './services/vehicle.service';
 import { ServiceItemService } from './services/service-item.service';
+import { DisplayPipe } from './displayPipe.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ServiceItemService } from './services/service-item.service';
     LoginComponent,
     ProfileComponent,
     VehicleComponent,
-    NavbarComponent
+    NavbarComponent,
+    DisplayPipe
   ],
   imports: [
     BrowserModule,

@@ -15,13 +15,17 @@ export class InMemoryDataService implements InMemoryDbService {
         company_id: null,
         firstName: 'Grant',
         lastName: 'Moser',
-        pictureURL: null
+        pictureURL: 'https://i.kym-cdn.com/photos/images/newsfeed/000/813/218/fe5.jpg',
       },
       {
         id: 2,
         email: 'technician@gmail.com',
         password: 'password',
         role_id: 2,
+        company_id: 1,
+        firstName: 'Martin',
+        lastName: 'Cordero',
+        pictureURL: 'https://cdn3.f-cdn.com/contestentries/1376995/30494909/5b566bc71d308_thumb900.jpg',
       },
     ];
 
@@ -36,7 +40,8 @@ export class InMemoryDataService implements InMemoryDbService {
         color: 'orange',
         mileage: 404,
         user_id: 1,
-        insurance_id: 1
+        insurance_id: 1,
+        photoURL: 'https://i5.walmartimages.com/asr/a2de0031-0ee4-4635-a4ae-4bfc79a1dce5_1.6475bbff2702d1f46bd9cc56dd53e3b0.jpeg',
       },
     ];
     const services = [

@@ -9,7 +9,7 @@ import { VehicleService } from 'src/app/services/vehicle.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-
+  
   constructor(
     private loginService: LoginService, 
     private router: Router,
@@ -23,9 +23,7 @@ export class NavbarComponent implements OnInit {
     this.loginService.currentUser = null;
   }
 
-  async gotoVehicle(id: number){
-    console.log("Test if sending vehicle url");
-    await this.vehicleService.setCurrentVehicle(id);
+  gotoVehicle(id: number){
     this.router.navigate(['/vehicle/' + id]);
   }
 }

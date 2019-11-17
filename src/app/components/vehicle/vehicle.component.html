@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid pt-4">
     <!-- Section: Profile -->
     <section>
         <!-- Grid row -->
@@ -24,30 +24,33 @@
                 <!-- Section: Basic Info -->
                 <section class="card profile-card mb-4">
                     <div class="avatar z-depth-1-half">
-                        <img src="/assets/car-default.png" alt="profile pic"
+                        <img src={{vehicle?.photoURL}} alt="profile pic"
                             class="img-responsive rounded fit-image img-fluid">
                     </div>
                     <!-- Card content -->
 
-                    <h4 class="card-title mt-3"><strong>CAR-NAME</strong></h4>
+                    <h4 class="card-title mt-3"><strong>{{vehicle?.name}}</strong></h4>
                     <p class="dark-grey-text mb-1">Vehicle Details</p>
 
                     <div class="row pt-1 card-body">
-                        <div class="col-3">
+                        <div class="col-12">
                             <ul class="pl-0" style="list-style-type: none; text-align: left;">
+                                <li><a>Owner</a></li> <!--make this the name of the user-->
+                                <li class="text-right">{{vehicle?.user_id}}</li> 
                                 <li>Year</li>
+                                <li class="text-right">{{vehicle?.year}}</li> 
                                 <li>Make</li>
+                                <li class="text-right">{{vehicle?.make}}</li>
                                 <li>Model</li>
+                                <li class="text-right">{{vehicle?.model}}</li>
                                 <li>VIN</li>
-                            </ul>
-                        </div>
-
-                        <div class="col-9">
-                            <ul class="pl-0" style="list-style-type: none; text-align: left;">
-                                <li>{{vehicle?.year}}</li>
-                                <li>{{vehicle?.make}}</li>
-                                <li>{{vehicle?.model}}</li>
-                                <li>{{vehicle?.VIN}}</li>
+                                <li class="text-right">{{vehicle?.VIN}}</li>
+                                <li>Color</li>
+                                <li class="text-right">{{vehicle?.color}}</li>
+                                <li>Mileage</li>
+                                <li class="text-right">{{vehicle?.mileage}}</li>
+                                <li>Insurance</li>
+                                <li class="text-right">{{vehicle?.insurance_id}}</li>
                             </ul>
                         </div>
                     </div>

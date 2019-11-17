@@ -6,26 +6,21 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class VehicleService {
-  currentVehicle: Vehicle;
-  vehicleList: Vehicle[];
+  vehicleList: Vehicle[]; //users vehicles
   vehiclesUrl = 'api/vehicles';
 
   ngOnInit(){
-    this.currentVehicle = null;
+    this.vehicleList = null;
   }
 
   constructor(
     private http: HttpClient
   ) { }  
 
-  async getVehicle(id: number){
+  async getVehicle(id: String){
     return this.http.get<Vehicle>(`${this.vehiclesUrl}/${id}`).toPromise();
   }
 
-  async setCurrentVehicle(id: number){
-    this.currentVehicle = await this.getVehicle(id);
-    console.log(this.currentVehicle);
-  }
 
   // async getUserVehicles(id: number){
   //   return this.http.get<Vehicle>(`${this.vehiclesUrl}/${id}`).toPromise;

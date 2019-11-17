@@ -12,6 +12,7 @@ import { Vehicle } from 'src/app/models/vehicle';
 })
 export class VehicleComponent implements OnInit {
   vehicle: Vehicle;
+  vehicleID: String;
   serviceItems: Service[];
 
 
@@ -21,14 +22,9 @@ export class VehicleComponent implements OnInit {
     private vehicleService: VehicleService,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loginService.checkOnline();
-    this.loadVehicle();
+    this.vehicleID = this.router.url.match(/\d+$/)[0];
+    this.vehicle = <Vehicle>await this.vehicleService.getVehicle(this.vehicleID);
   }
-
-  loadVehicle(){
-    this.vehicle = this.vehicleService.currentVehicle;
-  }
-
-
 }

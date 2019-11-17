@@ -26,6 +26,10 @@ export class LoginComponent implements OnInit {
     //signup submit in modal
   }
 
+  forgotPassword(){
+    //fpass in modal
+  }
+
   onSubmit(){
     this.loginService.login(this.loginForm.value['email'], this.loginForm.value['password']);
   }
