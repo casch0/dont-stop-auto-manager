@@ -25,23 +25,27 @@
             <div class="col-xl-3 col-lg-4 col-md-4 text-center">
 
                 <!-- Card row -->
-                <div class="card-deck">
+                <div *ngFor="let v of vehicles" class="card-deck">
 
                     <!-- Card -->
-                    <div class="card card-cascade narrower card-ecommerce mb-0" routerLink="vehicle/">
+                    <div class="card vh-20% mb-2" routerLink='{{getVehicleURL(v)}}'>
 
                         <!-- Card image -->
                         <div class="view view-cascade overlay">
-                            <img src="/assets/car-default.png" class="rounded mx-auto d-block" alt="">
+                            <img src={{v?.photoURL}} class="mx-auto d-block z-depth-1-half fit-image" alt="">
                         </div>
 
                         <!-- Card content -->
                         <div class="card-body card-body-cascade">
                             <!-- Title -->
-                            <h4 class="card-title">Car Name</h4>
+                            <h4 class="card-title">{{v?.name}}</h4>
+                            <p>{{v?.make}} {{v?.model}}</p>
                         </div>
                     </div>
                     <!-- Card -->
+
+
+
                 </div>
                 <!-- Card row -->
 
@@ -53,7 +57,7 @@
                 <!-- Card row -->
 
                 <!-- Pagination -->
-                <nav class="my-4 d-flex justify-content-center white pt-2 rounded">
+                <nav class="my-2 d-flex justify-content-center white pt-2 rounded">
 
                     <ul class="pagination pagination-circle pg-blue mb-0">
                         <!-- Numbers -->
@@ -71,17 +75,14 @@
 
                 <!-- Section: Experience -->
                 <section class="card mb-4">
-                    <div class="card-body">
+                    <div class="container card-body">
 
-                        <h5 class="text-center mb-2"><strong>Calendar</strong></h5>
-                        <tbody class="table-responsive">
-                            <tr>
-                                <td class="pl-1 pr-1 rounded text-left blue lighten-4">11/14/2019 9:00am - 11:00am</td>
-                            </tr>
-                            <tr>
-                                <td class="text-right"><a>Carmechanidsadssadasdasdasdasdc</a></td>
-                            </tr>
-                        </tbody>
+                        <h4 class="text-center mb-2">Calendar</h4>
+
+                        <div *ngFor="let s of futureServices" (click)="serviceModal.show()">
+                            <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.date | date:'short'}}</h5>
+                            <h5 class="text-right">{{s?.name}}</h5>
+                        </div>
                     </div>
                 </section>
                 <!-- Section: Experience -->
@@ -92,4 +93,54 @@
 
     </section>
     <!-- Section: Profile -->
+</div>
+
+
+<!--Service Modal-->
+<div mdbModal #serviceModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="serviceModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">Signup</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                    (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Edit Profile Modal-->
+<div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">Signup</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                    (click)="editModal.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save
+                    changes</button>
+            </div>
+        </div>
+    </div>
 </div>

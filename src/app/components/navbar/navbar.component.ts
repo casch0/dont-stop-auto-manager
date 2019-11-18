@@ -13,7 +13,6 @@ export class NavbarComponent implements OnInit {
   constructor(
     private loginService: LoginService, 
     private router: Router,
-    private vehicleService: VehicleService
   ) { }
 
   ngOnInit() {

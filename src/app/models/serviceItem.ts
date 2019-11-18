@@ -1,4 +1,4 @@
-export class Service{
+export class ServiceItem{
     id: number;
     name: String;
     type_id: number;
