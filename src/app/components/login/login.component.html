@@ -26,44 +26,82 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-center">
                 <button type="button" class="close pull-right" aria-label="Close" (click)="fPassModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title w-100" id="myModalLabel">Forgot Password</h4>
+                <h4 class="modal-title w-100 font-weight-bold">New Password</h4>
+
             </div>
-            <div class="modal-body">
-                ...
+
+            <div class="modal-body mx-4">
+
+                <div class="md-form mb-4">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="email" id="newPasswordEmail" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Email</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas fa-key prefix grey-text"></i>
+                    <input type="password" id="newPassword" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Password</label>
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
                     (click)="fPassModal.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save
-                    changes</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
             </div>
         </div>
     </div>
 </div>
+
 
 <!--Signup Modal-->
 <div mdbModal #signupModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-center">
                 <button type="button" class="close pull-right" aria-label="Close" (click)="signupModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title w-100" id="myModalLabel">Signup</h4>
+                <h4 class="modal-title w-100 font-weight-bold">New User</h4>
+
             </div>
-            <div class="modal-body">
-                ...
+
+            <div class="modal-body mx-4">
+                <div class="md-form mb-4">
+                    <i class="fas fa-user prefix grey-text"></i>
+                    <input type="text" id="firstName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form3">First Name</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas prefix grey-text"></i>
+                    <input type="text" id="lastName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form3">Last Name</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="email" id="Email" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Email</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas fa-key prefix grey-text"></i>
+                    <input type="password" id="Password" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Password</label>
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
                     (click)="signupModal.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save
-                    changes</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
             </div>
         </div>
     </div>
