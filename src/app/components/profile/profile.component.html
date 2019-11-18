@@ -14,6 +14,13 @@
                         <!-- Title -->
                         <h4 class="card-title"><strong>{{user?.firstName}} {{user?.lastName}}</strong></h4>
                     </div>
+                    <div class="edit-group">
+                        <button type="button" class="btn btn-light" (click)="addCar.show()">Add Car</button>
+                    </div>
+                    <div class="edit-group">
+                        <button type="button" class="btn btn-light" (click)="editModal.show()">Edit Profile</button>
+                    </div>
+
 
                 </section>
                 <!-- Section: Basic Info -->
@@ -83,6 +90,10 @@
                             <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.date | date:'short'}}</h5>
                             <h5 class="text-right">{{s?.name}}</h5>
                         </div>
+
+                        <div class="edit-group">
+                            <button type="button" class="btn btn-light" (click)="newService.show()">New Service</button>
+                        </div>
                     </div>
                 </section>
                 <!-- Section: Experience -->
@@ -94,52 +105,164 @@
     </section>
     <!-- Section: Profile -->
 </div>
-
-
-<!--Service Modal-->
-<div mdbModal #serviceModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+<div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close pull-right" aria-label="Close" (click)="serviceModal.hide()">
+            <div class="modal-header text-center">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title w-100" id="myModalLabel">Signup</h4>
+                <h4 class="modal-title w-100 font-weight-bold">Edit Profile</h4>
+
             </div>
-            <div class="modal-body">
-                ...
+
+            <div class="modal-body mx-4">
+                <div class="md-form mb-4">
+                    <i class="fas fa-user prefix grey-text"></i>
+                    <input type="text" id="newfirstName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form3">First Name</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas prefix grey-text"></i>
+                    <input type="text" id="newlastName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form3">Last Name</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="email" id="newEmail" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Email</label>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                    (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save
-                    changes</button>
+                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
+                    (click)="editModal.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
             </div>
         </div>
     </div>
 </div>
 
-
-<!--Edit Profile Modal-->
-<div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+<div mdbModal #newService="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close pull-right" aria-label="Close" (click)="editModal.hide()">
+            <div class="modal-header text-center">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="newService.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title w-100" id="myModalLabel">Signup</h4>
+                <h4 class="modal-title w-100 font-weight-bold">New Service</h4>
+
             </div>
-            <div class="modal-body">
-                ...
+
+            <div class="modal-body mx-4">
+                <div class="md-form mb-4">
+                    <i class="fas fa-user prefix grey-text"></i>
+                    <input type="text" id="ServiceType" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form3">Service Type</label>
+                </div>
+
+                <div class="modal-body mx-4">
+                    <textarea id="note" class="md-textarea form-control" rows="3"></textarea>
+                    <label for="form75">Note</label>
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                    (click)="editModal.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save
-                    changes</button>
+                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
+                    (click)="newService.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div mdbModal #serviceModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="serviceModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100 font-weight-bold">New Service</h4>
+
+            </div>
+
+            <div class="modal-body mx-4">
+                <div class="md-form mb-4">
+                    <i class="fas fa-money-bill prefix grey-text"></i>
+                    <input type="number" id="Cost" class="form-control fa-money-bill validate">
+                    <label data-error="wrong" data-success="right" for="form3">Cost</label>
+                </div>
+
+                <div class="modal-body mx-4">
+                    <textarea id="note" class="md-textarea form-control" rows="3"></textarea>
+                    <label for="form75">Note</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
+                    (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div mdbModal #addCar="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="addCar.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100 font-weight-bold">New Service</h4>
+
+            </div>
+            <div class="modal-body mx-4">
+                <div class="md-form mb-4">
+                    <i class="fas fa-user prefix grey-text"></i>
+                    <input type="text" id="carName" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form3">Car name</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas prefix grey-text"></i>
+                    <input type="number" id="year" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form3">Year</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="text" id="Make" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Make</label>
+                </div>
+                <div class="md-form mb-4">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="text" id="Model" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Model</label>
+                </div>
+                <div class="md-form mb-4">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="text" id="vin" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">VIN</label>
+                </div>
+                <div class="md-form mb-4">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="text" id="colpr" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Color</label>
+                </div>
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
+                    (click)="addCar.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
             </div>
         </div>
     </div>
