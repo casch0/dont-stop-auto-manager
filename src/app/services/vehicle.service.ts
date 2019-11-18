@@ -21,8 +21,7 @@ export class VehicleService {
     return this.http.get<Vehicle>(`${this.vehiclesUrl}/${id}`).toPromise();
   }
 
-
-  // async getUserVehicles(id: number){
-  //   return this.http.get<Vehicle>(`${this.vehiclesUrl}/${id}`).toPromise;
-  // }
+  async getUserVehicles(id: number){
+    return this.http.get<Vehicle[]>(`${this.vehiclesUrl}/?user_id=${id}`).toPromise();
+  }
 }
