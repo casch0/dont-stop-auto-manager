@@ -14,11 +14,13 @@
                         <!-- Title -->
                         <h4 class="card-title"><strong>{{user?.firstName}} {{user?.lastName}}</strong></h4>
                     </div>
-                    <div class="edit-group">
-                        <button type="button" class="btn btn-light" (click)="addCar.show()">Add Car</button>
-                    </div>
-                    <div class="edit-group">
+                    <div *ngIf="this.loginService.currentUser?.id == this.profileID">
+                        <button type="button" class="btn btn-light" (click)="addCar.show()">New Vehicle</button>
                         <button type="button" class="btn btn-light" (click)="editModal.show()">Edit Profile</button>
+                    </div>
+
+                    <div *ngIf="this.loginService.currentUser?.role_id == 2">
+                        <button type="button" class="btn btn-light" (click)="newService.show()">New Service</button>
                     </div>
 
 
@@ -91,9 +93,6 @@
                             <h5 class="text-right">{{s?.name}}</h5>
                         </div>
 
-                        <div class="edit-group">
-                            <button type="button" class="btn btn-light" (click)="newService.show()">New Service</button>
-                        </div>
                     </div>
                 </section>
                 <!-- Section: Experience -->
@@ -105,6 +104,12 @@
     </section>
     <!-- Section: Profile -->
 </div>
+
+<!--MODALS-->
+<!--MODALS-->
+<!--MODALS-->
+
+<!--Edit User Modal-->
 <div mdbModal #editModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -114,37 +119,36 @@
                     <span aria-hidden="true">×</span>
                 </button>
                 <h4 class="modal-title w-100 font-weight-bold">Edit Profile</h4>
-
             </div>
 
-            <div class="modal-body mx-4">
-                <div class="md-form mb-4">
-                    <i class="fas fa-user prefix grey-text"></i>
-                    <input type="text" id="newfirstName" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form3">First Name</label>
-                </div>
+            <form [formGroup]="editForm">
+                <div class="modal-body mx-4">
+                    <div class="md-form mb-4">
+                        <i class="fas fa-user prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" />
+                    </div>
 
-                <div class="md-form mb-4">
-                    <i class="fas prefix grey-text"></i>
-                    <input type="text" id="newlastName" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form3">Last Name</label>
-                </div>
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" />
+                    </div>
 
-                <div class="md-form mb-4">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="email" id="newEmail" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form2">Email</label>
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas fa-envelope prefix grey-text"></i>
+                        <input type="email" class="form-control" placeholder="Email" formControlName="email" />
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
-                    (click)="editModal.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
-            </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" mdbBtn color="primary" class="relative waves-light"
+                        (click)="editUser(); editModal.hide()" mdbWavesEffect>Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
+
+<!--New Service Modal-->
 <div mdbModal #newService="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -154,7 +158,6 @@
                     <span aria-hidden="true">×</span>
                 </button>
                 <h4 class="modal-title w-100 font-weight-bold">New Service</h4>
-
             </div>
 
             <div class="modal-body mx-4">
@@ -178,6 +181,8 @@
         </div>
     </div>
 </div>
+
+<!--View Service Modal-->
 <div mdbModal #serviceModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="myBasicModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -212,6 +217,7 @@
     </div>
 </div>
 
+<!--New Vehicle Modal-->
 <div mdbModal #addCar="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -220,50 +226,48 @@
                 <button type="button" class="close pull-right" aria-label="Close" (click)="addCar.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title w-100 font-weight-bold">New Service</h4>
-
-            </div>
-            <div class="modal-body mx-4">
-                <div class="md-form mb-4">
-                    <i class="fas fa-user prefix grey-text"></i>
-                    <input type="text" id="carName" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form3">Car name</label>
-                </div>
-
-                <div class="md-form mb-4">
-                    <i class="fas prefix grey-text"></i>
-                    <input type="number" id="year" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form3">Year</label>
-                </div>
-
-                <div class="md-form mb-4">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="text" id="Make" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form2">Make</label>
-                </div>
-                <div class="md-form mb-4">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="text" id="Model" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form2">Model</label>
-                </div>
-                <div class="md-form mb-4">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="text" id="vin" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form2">VIN</label>
-                </div>
-                <div class="md-form mb-4">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="text" id="colpr" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form2">Color</label>
-                </div>
+                <h4 class="modal-title w-100 font-weight-bold">New Vehicle</h4>
             </div>
 
+            <form [formGroup]="vForm">
+                <div class="modal-body mx-4">
 
-            <div class="modal-footer">
-                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
-                    (click)="addCar.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
-            </div>
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas fa-car prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Car Name" formControlName="name" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="number" class="form-control" placeholder="Year" formControlName="year" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Make" formControlName="make" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Model" formControlName="model" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="VIN" formControlName="vin" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Color" formControlName="color" />
+                    </div>
+                </div>
+
+                <div class="modal-footer justify-content-center">
+                    <button type="button" mdbBtn color="primary" class="relative waves-light"
+                        (click)="newVehicle(); addCar.hide()" mdbWavesEffect>Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

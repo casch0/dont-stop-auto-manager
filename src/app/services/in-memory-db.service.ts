@@ -129,11 +129,6 @@ export class InMemoryDataService implements InMemoryDbService {
     return { users, vehicles, services };
   }
 
-  // Overrides the genId method to ensure that a ticket always has an id.
-  // If the tickets array is empty,
-  // the method below returns the initial number (11).
-  // if the tickets array is not empty, the method below returns the highest
-  // ticket id + 1.
   // genId(tickets: Ticket[]): number {
   //   return tickets.length > 0 ? Math.max(...tickets.map(ticket => ticket.id)) + 1 : 1000;
   // }

@@ -94,11 +94,11 @@
                         <i class="fas fa-key prefix grey-text"></i>
                         <input type="password" class="form-control" placeholder="Password" formControlName="password" />
                     </div>
-
                 </div>
             </form>
             <div class="modal-footer justify-content-center">
-                <button type="submit" mdbBtn color="primary" class="relative waves-light" (click)="signup()" mdbWavesEffect>Submit</button>
+                <button type="submit" mdbBtn color="primary" class="relative waves-light"
+                    (click)="signup(); signupModal.hide()" mdbWavesEffect>Submit</button>
             </div>
         </div>
     </div>
