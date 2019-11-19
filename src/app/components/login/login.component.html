@@ -72,48 +72,33 @@
 
             </div>
 
-            <div class="modal-body mx-4">
-                <div class="md-form mb-4">
-                    <i class="fas fa-user prefix grey-text"></i>
-                    <input type="text" id="firstName" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form3">First Name</label>
-                </div>
+            <form [formGroup]="signupForm">
 
-                <div class="md-form mb-4">
-                    <i class="fas prefix grey-text"></i>
-                    <input type="text" id="lastName" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form3">Last Name</label>
-                </div>
+                <div class="modal-body mx-4 form-group">
+                    <div class="md-form mb-4">
+                        <i class="fas fa-user prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" />
+                    </div>
 
-                <div class="md-form mb-4">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="email" id="Email" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form2">Email</label>
-                </div>
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" />
+                    </div>
 
-                <div class="md-form mb-4">
-                    <i class="fas fa-key prefix grey-text"></i>
-                    <input type="password" id="Password" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form2">Password</label>
-                </div>
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas fa-envelope prefix grey-text"></i>
+                        <input type="email" class="form-control" placeholder="Email" formControlName="email" />
+                    </div>
 
-                <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="defaultGroupExample1"
-                        name="groupOfDefaultRadios" checked>
-                    <label class="custom-control-label" for="defaultGroupExample1">Consumer</label>
-                </div>
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas fa-key prefix grey-text"></i>
+                        <input type="password" class="form-control" placeholder="Password" formControlName="password" />
+                    </div>
 
-                <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="defaultGroupExample2"
-                        name="groupOfDefaultRadios" >
-                    <label class="custom-control-label" for="defaultGroupExample2">Technician</label>
                 </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
-                    (click)="signupModal.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
+            </form>
+            <div class="modal-footer justify-content-center">
+                <button type="submit" mdbBtn color="primary" class="relative waves-light" (click)="signup()" mdbWavesEffect>Submit</button>
             </div>
         </div>
     </div>

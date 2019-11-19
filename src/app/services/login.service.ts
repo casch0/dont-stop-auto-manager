@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ export class LoginService {
   currentUser: User;
   usersUrl = 'api/users';
   profileURL: String;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
 
   ngOnInit() {
@@ -42,6 +47,14 @@ export class LoginService {
     return this.http.get<User>(`${this.usersUrl}/${id}`).toPromise();
   }
 
+  addUser (user: User): Observable<User> {
+    return this.http.post<User>(this.usersUrl, user, this.httpOptions);
+  }
+
+  updateUser (user: User): Observable<any> {
+    return this.http.put(this.usersUrl, user, this.httpOptions);
+  }
+
   //TODO 
   // use for real login authentication server side
   //
@@ -49,4 +62,5 @@ export class LoginService {
   //   return this.http.post<User>(`${this.usersUrl}`, { "username": `${username}`, "password": `${password}` }).toPromise();
   // }
 
+  
 }
