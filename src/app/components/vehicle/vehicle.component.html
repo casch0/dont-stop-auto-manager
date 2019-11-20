@@ -60,6 +60,10 @@
                         </div>
                     </div>
 
+                   <!-- <div>
+                        <button type="button" class="btn btn-light" (click)="newVehicle(); editVehicle.show()">Edit
+                            Vehicle</button>
+                    </div>-->
                 </section>
                 <!-- Section: Basic Info -->
 
@@ -73,7 +77,7 @@
                 <section class="card mb-4">
                     <div class="card-body text-center">
 
-                        <h4 class="text-center mb-2">Service History</h4>
+                        <h4 class="text-center mb-2">Past Services</h4>
 
                         <div *ngFor="let s of pastServices" (click)="serviceModal.show()">
                             <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.date | date:'short'}}</h5>
@@ -81,6 +85,7 @@
                         </div>
                     </div>
                 </section>
+
 
 
             </div>
@@ -106,20 +111,21 @@
                 <h4 class="modal-title w-100 font-weight-bold">New Service</h4>
 
             </div>
-
-            <div class="modal-body mx-4">
-                <div class="md-form mb-4">
-                    <i class="fas fa-money-bill prefix grey-text"></i>
-                    <input type="number" id="Cost" class="form-control fa-money-bill validate">
-                    <label data-error="wrong" data-success="right" for="form3">Cost</label>
-                </div>
-
+            <form [formGroup]="editServiceForm">
                 <div class="modal-body mx-4">
-                    <textarea id="note" class="md-textarea form-control" rows="3"></textarea>
-                    <label for="form75">Note</label>
-                </div>
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas fa-money-bill prefix grey-text"></i>
+                        <input type="number" id="cost" class="form-control fa-money-bill validate">
+                        <label data-error="wrong" data-success="right" for="form3">Cost</label>
+                    </div>
 
-            </div>
+                    <div class="modal-body mx-4 form-group">
+                        <textarea id="note" class="md-textarea form-control" rows="3"></textarea>
+                        <label for="form75">Note</label>
+                    </div>
+
+                </div>
+            </form>
             <div class="modal-footer">
                 <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
                     (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
@@ -128,3 +134,57 @@
         </div>
     </div>
 </div>
+
+<!--<div mdbModal #editVehicle="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="editVehicle.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100 font-weight-bold">Edit Vehicle</h4>
+            </div>
+            <form [formGroup]="editVehicleForm">
+                <div class="modal-body mx-4">
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Name" formControlName="name" />
+                    </div>
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="number" class="form-control" placeholder="Year" formControlName="year" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Make" formControlName="make" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Model" formControlName="model" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="VIN" formControlName="VIN" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Color" formControlName="color" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Mileage" formControlName="mileage" />
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
+            </div>
+        </div>
+    </div>
+</div>-->
