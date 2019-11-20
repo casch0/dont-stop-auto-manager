@@ -90,7 +90,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 1,
         name: 'replaced front bumper',
-        type_id: 1,
+        type_id: 2,
         cost: 100,
         date: new Date(1996,1,1,0,0,0,0),
         techNote: 'i did it',
@@ -103,7 +103,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 2,
         name: 'replaced rims',
-        type_id: 1,
+        type_id: 2,
         cost: 100,
         date: new Date(),
         techNote: 'i did it',
@@ -116,7 +116,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 3,
         name: 'added sun roof',
-        type_id: 1,
+        type_id: 4,
         cost: 100,
         date: new Date(2020,1,1,0,0,0,0),
         techNote: 'i did it',

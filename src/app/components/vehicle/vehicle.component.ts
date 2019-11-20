@@ -18,7 +18,7 @@ export class VehicleComponent implements OnInit {
   vehicle: Vehicle;
   vehicleID: String;
   serviceItems: ServiceItem[];
-
+  selectedService: ServiceItem;
 
   pastServices = <ServiceItem[]>[];
   futureServices = <ServiceItem[]>[];
@@ -83,5 +83,9 @@ export class VehicleComponent implements OnInit {
     );
 
     this.ngOnInit();
+  }
+
+  selectService(s: ServiceItem){
+    this.selectedService = s;
   }
 }

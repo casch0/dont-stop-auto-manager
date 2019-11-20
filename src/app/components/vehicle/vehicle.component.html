@@ -2,9 +2,9 @@
     <!-- Section: Profile -->
     <section>
         <!-- Grid row -->
-        <div class="row mt-5">
+        <div class="row mt-5 justify-content-center">
             <!-- Grid column -->
-            <div class="col-lg-4 col-md-12">
+            <div class="col-xl-3 col-lg-4 col-md-12">
 
                 <!-- Section: Achievements -->
                 <section class="card mb-4">
@@ -12,7 +12,7 @@
 
                         <h4 class="text-center mb-2">Upcoming Services</h4>
 
-                        <div *ngFor="let s of futureServices" (click)="serviceModal.show()">
+                        <div *ngFor="let s of futureServices" (click)="serviceModal.show(); selectService(s);">
                             <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.date | date:'short'}}</h5>
                             <h5 class="text-right">{{s?.name}}</h5>
                         </div>
@@ -23,7 +23,7 @@
             <!-- Grid column -->
 
             <!-- Grid column -->
-            <div class="col-lg-4 col-md-6 text-center">
+            <div class="col-xl-3 col-lg-4 col-md-6 text-center">
 
                 <!-- Section: Basic Info -->
                 <section class="card profile-card mb-4">
@@ -72,14 +72,14 @@
             </div>
             <!-- Grid column -->
 
-            <div class="col-lg-4 col-md-6 text-right">
+            <div class="col-xl-3 col-lg-4 col-md-6 text-right">
                 <!-- Section: Achievements -->
                 <section class="card mb-4">
                     <div class="card-body text-center">
 
                         <h4 class="text-center mb-2">Past Services</h4>
 
-                        <div *ngFor="let s of pastServices" (click)="serviceModal.show()">
+                        <div *ngFor="let s of pastServices" (click)="serviceModal.show(); selectService(s);">
                             <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.date | date:'short'}}</h5>
                             <h5 class="text-right">{{s?.name}}</h5>
                         </div>
@@ -102,26 +102,43 @@
 <!--View Service Modal-->
 <div mdbModal #serviceModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="myBasicModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog justify-content-center" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <button type="button" class="close pull-right" aria-label="Close" (click)="serviceModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title w-100 font-weight-bold">New Service</h4>
+                <h4 class="modal-title w-100 font-weight-bold">{{this.selectedService?.name}}</h4>
+            </div>
 
-                <div class="modal-footer">
-                    <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
-                        (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
-                </div>
+            <div class="modal-body mx-4">
+                <ul class="pl-0" style="list-style-type: none; text-align: left;">
+                    <li>Type</li>
+                    <li class="text-right">{{this.selectedService?.type_id | displayPipe}}</li>
+                    <li>Cost</li>
+                    <li class="text-right">{{this.selectedService?.cost}}</li>
+                    <li>Date</li>
+                    <li class="text-right">{{this.selectedService?.date | date:'short'}}</li>
+                    <li>Tehcnician Note</li>
+                    <li class="text-right">{{this.selectedService?.techNote}}</li>
+                    <li>User Note</li>
+                    <li class="text-right">{{this.selectedService?.userNote}}</li>
+                    <li>Technician</li>
+                    <!--Should link to technician-->
+                    <li class="text-right">{{this.selectedService?.user_id}}</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
+                    (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
             </div>
         </div>
     </div>
 </div>
 
 <!--Edit Vehicle Modal-->
-<div mdbModal #editVehicleModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-    aria-hidden="true">
+<div mdbModal #editVehicleModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="myBasicModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -171,7 +188,7 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" mdbBtn color="primary" class="relative waves-light"
-                    (click)="updateVehicle(); editVehicleModal.hide()" mdbWavesEffect>Submit</button>
+                        (click)="updateVehicle(); editVehicleModal.hide()" mdbWavesEffect>Submit</button>
                 </div>
             </form>
         </div>

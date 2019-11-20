@@ -13,8 +13,10 @@ export class DisplayPipe implements PipeTransform {
     let newStr: string = "";
     
     switch(value){
-        case 1: newStr = "Customer"; break;
-        case 2: newStr = "Technician"; break;
+        case 1: newStr = "Maintenance"; break;
+        case 2: newStr = "Body Repair"; break;
+        case 3: newStr = "Mechanical Repair"; break;
+        case 4: newStr = "Other"; break;
     }
     return newStr;
   }
