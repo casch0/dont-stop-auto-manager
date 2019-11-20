@@ -60,10 +60,10 @@
                         </div>
                     </div>
 
-                   <!-- <div>
-                        <button type="button" class="btn btn-light" (click)="newVehicle(); editVehicle.show()">Edit
+                    <div>
+                        <button type="button" class="btn btn-light" (click)="editVehicleModal.show()">Edit
                             Vehicle</button>
-                    </div>-->
+                    </div>
                 </section>
                 <!-- Section: Basic Info -->
 
@@ -99,7 +99,7 @@
 </div>
 
 
-<!--Service Modal-->
+<!--View Service Modal-->
 <div mdbModal #serviceModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
     aria-labelledby="myBasicModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -110,47 +110,35 @@
                 </button>
                 <h4 class="modal-title w-100 font-weight-bold">New Service</h4>
 
-            </div>
-            <form [formGroup]="editServiceForm">
-                <div class="modal-body mx-4">
-                    <div class="md-form mb-4 form-group">
-                        <i class="fas fa-money-bill prefix grey-text"></i>
-                        <input type="number" id="cost" class="form-control fa-money-bill validate">
-                        <label data-error="wrong" data-success="right" for="form3">Cost</label>
-                    </div>
-
-                    <div class="modal-body mx-4 form-group">
-                        <textarea id="note" class="md-textarea form-control" rows="3"></textarea>
-                        <label for="form75">Note</label>
-                    </div>
-
+                <div class="modal-footer">
+                    <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
+                        (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
                 </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
-                    (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
             </div>
         </div>
     </div>
 </div>
 
-<!--<div mdbModal #editVehicle="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+<!--Edit Vehicle Modal-->
+<div mdbModal #editVehicleModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <button type="button" class="close pull-right" aria-label="Close" (click)="editVehicle.hide()">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="editVehicleModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
                 <h4 class="modal-title w-100 font-weight-bold">Edit Vehicle</h4>
             </div>
+
             <form [formGroup]="editVehicleForm">
                 <div class="modal-body mx-4">
+
                     <div class="md-form mb-4 form-group">
                         <i class="fas prefix grey-text"></i>
                         <input type="text" class="form-control" placeholder="Name" formControlName="name" />
                     </div>
+
                     <div class="md-form mb-4 form-group">
                         <i class="fas prefix grey-text"></i>
                         <input type="number" class="form-control" placeholder="Year" formControlName="year" />
@@ -168,7 +156,7 @@
 
                     <div class="md-form mb-4 form-group">
                         <i class="fas prefix grey-text"></i>
-                        <input type="text" class="form-control" placeholder="VIN" formControlName="VIN" />
+                        <input type="text" class="form-control" placeholder="VIN" formControlName="vin" />
                     </div>
 
                     <div class="md-form mb-4 form-group">
@@ -178,13 +166,14 @@
 
                     <div class="md-form mb-4 form-group">
                         <i class="fas prefix grey-text"></i>
-                        <input type="text" class="form-control" placeholder="Mileage" formControlName="mileage" />
+                        <input type="number" class="form-control" placeholder="Mileage" formControlName="mileage" />
                     </div>
                 </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" mdbBtn color="primary" class="relative waves-light"
+                    (click)="updateVehicle(); editVehicleModal.hide()" mdbWavesEffect>Submit</button>
+                </div>
             </form>
-            <div class="modal-footer">
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
-            </div>
         </div>
     </div>
-</div>-->
+</div>

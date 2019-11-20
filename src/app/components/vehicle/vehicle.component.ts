@@ -13,8 +13,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./vehicle.component.scss']
 })
 export class VehicleComponent implements OnInit {
-  editVehicle: FormGroup;
-  serviceModal: FormGroup;
+  editVehicleForm: FormGroup;
+
   vehicle: Vehicle;
   vehicleID: String;
   serviceItems: ServiceItem[];
@@ -33,7 +33,7 @@ export class VehicleComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.editVehicle = this.formBuilder.group({
+    this.editVehicleForm = this.formBuilder.group({
       name: '',
       vin: '',
       year: '',
@@ -42,11 +42,6 @@ export class VehicleComponent implements OnInit {
       color: '',
       mileage: '',
       photoURL: 'assets/car-default.png',
-    });
-
-    this.serviceModal = this.formBuilder.group({
-      cost: '',
-      note: '',
     });
 
     this.loginService.checkOnline();
@@ -58,6 +53,9 @@ export class VehicleComponent implements OnInit {
   }
 
   populateServiceList() {
+    this.pastServices = [];
+    this.futureServices = [];
+    
     let now = new Date().getTime();
     for (let s of this.serviceItems) {
       let sTime = new Date(s.date).getTime();
@@ -69,21 +67,18 @@ export class VehicleComponent implements OnInit {
     }
   }
 
-  newVehicle() {
-    let v = new Vehicle();
-    v.name = this.editVehicle.value['name'];
-    v.VIN = this.editVehicle.value['vin'];
-    v.year = this.editVehicle.value['year'];
-    v.make = this.editVehicle.value['make'];
-    v.model = this.editVehicle.value['model'];
-    v.color = this.editVehicle.value['color'];
-    v.mileage = this.editVehicle.value['mileage'];
-    v.photoURL = '/assets/car-default.png'; //   TODO ADD picture (after S3 integration)
+  updateVehicle() {
+    let v = this.vehicle;
+    v.name = this.editVehicleForm.value['name'];
+    v.VIN = this.editVehicleForm.value['vin'];
+    v.year = this.editVehicleForm.value['year'];
+    v.make = this.editVehicleForm.value['make'];
+    v.model = this.editVehicleForm.value['model'];
+    v.color = this.editVehicleForm.value['color'];
+    v.mileage = this.editVehicleForm.value['mileage'];
+    //v.photoURL = '/assets/car-default.png'; //   TODO ADD picture (after S3 integration)
 
-    v.user_id = this.loginService.currentUser.id;
-    
-
-    this.vehicleService.createVehicle(v).subscribe(
+    this.vehicleService.updateVehicle(v).subscribe(
       () => console.log(v)
     );
 
