@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { VehicleService } from './services/vehicle.service';
 import { ServiceItemService } from './services/service-item.service';
 import { DisplayPipe } from './displayPipe.pipe';
+import { ProfileTechnicianComponent } from './components/profile-technician/profile-technician.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DisplayPipe } from './displayPipe.pipe';
     ProfileComponent,
     VehicleComponent,
     NavbarComponent,
-    DisplayPipe
+    DisplayPipe,
+    ProfileTechnicianComponent,
   ],
   imports: [
     BrowserModule,

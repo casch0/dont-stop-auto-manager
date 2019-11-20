@@ -85,9 +85,7 @@
                         </div>
                     </div>
                 </section>
-
-
-
+                
             </div>
 
         </div>
@@ -113,6 +111,9 @@
 
             <div class="modal-body mx-4">
                 <ul class="pl-0" style="list-style-type: none; text-align: left;">
+                    <li>Vehicle</li>
+                    <!--Should link to vehicle-->
+                    <li class="text-right">{{this.selectedService?.vehicle_id}}</li>
                     <li>Type</li>
                     <li class="text-right">{{this.selectedService?.type_id | displayPipe}}</li>
                     <li>Cost</li>

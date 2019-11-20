@@ -126,7 +126,23 @@ export class InMemoryDataService implements InMemoryDbService {
         receiptURL: ''
       },
     ];
-    return { users, vehicles, services };
+
+      const techServices = [
+      //for technician
+      {
+        id: 4,
+        name: 'install subwoofers',
+        type_id: 4,
+        cost: 99,
+        date: null, //set when technician accpets request
+        techNote: 'description of service',
+        userNote: null,  //userNote and vehicle get assigned when request is submitted
+        vehicle_id: null,
+        user_id: 1,
+        receiptURL: ''
+      },
+    ];
+    return { users, vehicles, services, techServices };
   }
 
   // genId(tickets: Ticket[]): number {

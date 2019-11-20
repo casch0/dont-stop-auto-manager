@@ -21,6 +21,10 @@ export class ServiceItemService {
     return this.http.get<ServiceItem>(`${this.servicesURL}/${id}`).toPromise();
   }
 
+  async getTechnicianServices(id: String){
+    return this.http.get<ServiceItem[]>(`api/techServices/`).toPromise();
+  }
+
   async getVehicleServices(id: String){
     return this.http.get<ServiceItem[]>(`${this.servicesURL}/?vehicle_id=${id}`).toPromise();
   }

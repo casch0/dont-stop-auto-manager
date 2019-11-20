@@ -43,6 +43,12 @@ export class LoginService {
     }
   }
 
+  checkUserType() {
+    if (this.currentUser.role_id == 2) {
+      this.router.navigate(['/technician/' + this.currentUser.id]);
+    }
+  }
+
   async getUser(id: String) {
     return this.http.get<User>(`${this.usersUrl}/${id}`).toPromise();
   }
