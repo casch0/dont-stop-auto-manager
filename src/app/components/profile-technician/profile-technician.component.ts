@@ -18,8 +18,10 @@ export class ProfileTechnicianComponent implements OnInit {
 
   user: User;
   profileID: String;
-  serviceItems: ServiceItem[];
-  availableServiceItems: ServiceItem[];
+  serviceItems = <ServiceItem[]>[];
+  technicianServices = <ServiceItem[]>[];
+  availableServiceItems = <ServiceItem[]>[];
+  requestedServices = <ServiceItem[]>[];
   
   futureServices = <ServiceItem[]>[];
 
@@ -39,32 +41,32 @@ export class ProfileTechnicianComponent implements OnInit {
       email: '',
     });
 
-    this.vForm = this.formBuilder.group({
-      name: '',
-      vin: '',
-      year: '',
-      make: '',
-      model: '',
-      color: '',
-      mileage: '',
-      photoURL: 'assets/car-default.png',
-    });
-
     this.profileID = this.router.url.match(/\d+$/)[0];
     this.user = <User>await this.loginService.getUser(this.profileID);
     this.serviceItems = <ServiceItem[]>await this.SIS.getVehicleServices('1'); //replace with technician's upcoming services
-    this.availableServiceItems = <ServiceItem[]> await this.SIS.getTechnicianServices(this.profileID); //replace with technician's upcoming services
+    this.technicianServices = <ServiceItem[]> await this.SIS.getTechnicianServices(this.profileID); //replace with technician's upcoming services
     this.populateServiceList();
   }
 
   populateServiceList() {
     this.futureServices = [];
+    this.requestedServices = [];
 
     let now = new Date().getTime();
     for (let s of this.serviceItems) {
       let sTime = new Date(s.date).getTime();
       if (sTime >= now){
         this.futureServices.push(s);
+      }
+    }
+
+    for (let s of this.technicianServices) {
+      if (s.vehicle_id == null){
+        if(s.date == null){
+          this.availableServiceItems.push(s);
+        } else {
+          this.requestedServices.push(s);
+        }
       }
     }
   }
@@ -86,6 +88,4 @@ export class ProfileTechnicianComponent implements OnInit {
   selectService(s: ServiceItem){
     this.selectedService = s;
   }
-
-  
 }
