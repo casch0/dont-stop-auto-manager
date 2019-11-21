@@ -1,17 +1,105 @@
-<div class="container login-container" id="bigCont">
-    <div class="col-md-6 login-form-1" id="cont">
-        <img src="../assets/logo.png" alt="logo" class="logo">
-        <div class="form-group">
-            <input type="email" class="form-control" placeholder="Email" value="" />
+<div class="container-fluid" style="text-align: center;">
+    <div class="col-md-4" id="cont">
+        <img src="../assets/logo.png" alt="logo" class="img-fluid logo">
+
+        <!--Form-->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email" formControlName="email" />
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" formControlName="password" />
+            </div>
+            <div class="form-group">
+                <button type="submit" [disabled]="!loginForm.value['email'] || !loginForm.value['password']"
+                    class="btn btn-light">Login</button>
+                <button type="button" class="btn btn-light" (click)="signupModal.show()">Signup</button>
+                <button type="button" class="btn btn-blue-grey" (click)="fPassModal.show()">Forgot Password?</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!--Forgot Password Modal-->
+<div mdbModal #fPassModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="fPassModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100 font-weight-bold">New Password</h4>
+
+            </div>
+
+            <div class="modal-body mx-4">
+
+                <div class="md-form mb-4">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="email" id="newPasswordEmail" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Email</label>
+                </div>
+
+                <div class="md-form mb-4">
+                    <i class="fas fa-key prefix grey-text"></i>
+                    <input type="password" id="newPassword" class="form-control validate">
+                    <label data-error="wrong" data-success="right" for="form2">Password</label>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
+                    (click)="fPassModal.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
+            </div>
         </div>
-        <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" value="" />
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btnSubmit" value="Login" />
-        </div>
-        <div class="form-group">
-            <a href="#" class="btnForgetPwd">Forget Password?</a>
+    </div>
+</div>
+
+
+<!--Signup Modal-->
+<div mdbModal #signupModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="signupModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100 font-weight-bold">New User</h4>
+
+            </div>
+
+            <form [formGroup]="signupForm">
+
+                <div class="modal-body mx-4 form-group">
+                    <div class="md-form mb-4">
+                        <i class="fas fa-user prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas prefix grey-text"></i>
+                        <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas fa-envelope prefix grey-text"></i>
+                        <input type="email" class="form-control" placeholder="Email" formControlName="email" />
+                    </div>
+
+                    <div class="md-form mb-4 form-group">
+                        <i class="fas fa-key prefix grey-text"></i>
+                        <input type="password" class="form-control" placeholder="Password" formControlName="password" />
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer justify-content-center">
+                <button type="submit" mdbBtn color="primary" class="relative waves-light"
+                    (click)="signup(); signupModal.hide()" mdbWavesEffect>Submit</button>
+            </div>
         </div>
     </div>
 </div>

@@ -1,63 +1,26 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark red navig-bar" [containerInside]="false">
+<mdb-navbar [hidden]="!this.loginService.currentUser"
+    SideClass="navbar fixed-top navbar-expand-lg navbar-dark unique-color " [containerInside]="false">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand navig-bar" href="#">Don't Stop! Auto Manager</a></mdb-navbar-brand>
+    <mdb-navbar-brand><a class="navbar-brand" routerLink={{this.loginService.profileURL}}
+            routerLinkActive="router-link-active">Don't Stop!</a></mdb-navbar-brand>
 
     <!-- Collapsible content -->
     <links>
+        <ul class="navbar-nav nav-flex-icons ml-auto">
 
-        <!-- Links -->
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link waves-light mx-2" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-            </li>
-
-            <!-- Dropdown -->
-            <li class="nav-item dropdown mx-2" dropdown>
-                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                    mdbWavesEffect>
-                    Statistics<span class="caret"></span></a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <!-- *ngFor directive here, displaying current user's car statistic pages -->
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Car 1</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Car 2</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Car3</a>
-                    <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-                </div>
-            </li>
-
-            <!-- Dropdown -->
-            <li class="nav-item dropdown mx-2" dropdown>
-                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                    mdbWavesEffect>
-                    Vehicles<span class="caret"></span></a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <!-- *ngFor directive here, displaying current user's car profiles -->
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Car 1</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Car 2</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Car 3</a>
-                    <div class="divider dropdown-divider"></div>
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-                </div>
-            </li>
-
-        </ul>
-        <!-- Links -->
-
-        <ul class="navbar-nav nav-flex-icons">
-            <li class="nav-item">
-                <a class="nav-link">1 <mdb-icon fas icon="envelope"></mdb-icon></a>
-            </li>
             <li class="nav-item avatar dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
                     mdbWavesEffect>
-                    <mdb-icon fas icon="user"></mdb-icon></a>
+                    <mdb-icon fas icon="user"></mdb-icon>
+                </a>
                 <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/profile">My Profile</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink={{this.loginService.profileURL}}>My
+                        Profile</a>
                     <!-- *Implement logout feature -->
-                    <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/login">Log out</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/login" (click)="logout()">Log
+                        out</a>
                 </div>
             </li>
         </ul>
