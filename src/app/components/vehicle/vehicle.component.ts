@@ -47,7 +47,7 @@ export class VehicleComponent implements OnInit {
     this.loginService.checkOnline();
     this.vehicleID = this.router.url.match(/\d+$/)[0];
     this.vehicle = <Vehicle>await this.vehicleService.getVehicle(this.vehicleID);
-    this.serviceItems = <ServiceItem[]>await this.SIS.getVehicleServices(this.vehicleID);
+    this.serviceItems = <ServiceItem[]>await this.vehicleService.getVehicleServices(this.vehicleID);
     this.populateServiceList();
 
   }

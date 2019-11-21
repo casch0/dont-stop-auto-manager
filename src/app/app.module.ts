@@ -41,9 +41,9 @@ import { ProfileTechnicianComponent } from './components/profile-technician/prof
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { dataEncapsulation: false }
+    // )
   ],
   providers: [LoginService, VehicleService, ServiceItemService],
   bootstrap: [AppComponent]
