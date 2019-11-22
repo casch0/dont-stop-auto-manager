@@ -41,7 +41,7 @@ export class VehicleComponent implements OnInit {
       model: '',
       color: '',
       mileage: '',
-      photoURL: 'assets/car-default.png',
+      // photoURL: 'assets/car-default.png',
     });
 
     this.loginService.checkOnline();
@@ -70,7 +70,7 @@ export class VehicleComponent implements OnInit {
   updateVehicle() {
     let v = this.vehicle;
     v.name = this.editVehicleForm.value['name'];
-    v.VIN = this.editVehicleForm.value['vin'];
+    v.vin = this.editVehicleForm.value['vin'];
     v.year = this.editVehicleForm.value['year'];
     v.make = this.editVehicleForm.value['make'];
     v.model = this.editVehicleForm.value['model'];

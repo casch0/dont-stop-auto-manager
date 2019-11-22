@@ -56,7 +56,7 @@ export class ProfileComponent implements OnInit {
       model: '',
       color: '',
       mileage: '',
-      photoURL: 'assets/car-default.png',
+      // photoURL: 'assets/car-default.png',
     });
 
     this.profileID = this.router.url.match(/\d+$/)[0];
@@ -105,16 +105,13 @@ export class ProfileComponent implements OnInit {
   newVehicle() {
     let v = new Vehicle();
     v.name = this.vForm.value['name'];
-    v.VIN = this.vForm.value['vin'];
+    v.vin = this.vForm.value['vin'];
     v.year = this.vForm.value['year'];
     v.make = this.vForm.value['make'];
     v.model = this.vForm.value['model'];
     v.color = this.vForm.value['color'];
     v.mileage = this.vForm.value['mileage'];
-    v.photoURL = '/assets/car-default.png'; //   TODO ADD picture (after S3 integration)
-
-    v.user_id = this.loginService.currentUser.id;
-    
+    // v.photoURL = '/assets/car-default.png'; //   TODO ADD picture (after S3 integration)
 
     this.vehicleService.createVehicle(v).subscribe(
       () => console.log(v)

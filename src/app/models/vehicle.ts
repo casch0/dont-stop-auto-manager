@@ -1,16 +1,19 @@
+import { User } from './user';
+
 export class Vehicle{
 
     id: number;
     name: String;
-    VIN: String;
+    vin: String;
     year: number;
     make: String;
     model: String;
     color: String;
     mileage: number;
-    user_id: number;
-    insurance_id: number;
+    userId: number;
+    insuranceId: number;
     photoURL: String;
+    serviceReportIds: number[];
 
     constructor(){
     }

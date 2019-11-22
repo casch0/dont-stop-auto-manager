@@ -9,6 +9,7 @@ export class User {
     firstName: String;
     lastName: String;
     photo: String;
+    roleId: number;
 
 	constructor() {
     }
