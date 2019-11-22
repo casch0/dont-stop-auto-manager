@@ -68,9 +68,9 @@ export class LoginService {
   }
 
   checkUserType() {
-    if (this.currentUser.role == 2) {
-      this.router.navigate(['/technician/' + this.currentUser.id]);
-    }
+    // if (this.currentUser.role.id == 2) {
+    //   this.router.navigate(['/technician/' + this.currentUser.id]);
+    // }
   }
 
   async getUser(id: String) {
