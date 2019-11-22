@@ -7,6 +7,7 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 import { ServiceItemService } from 'src/app/services/service-item.service';
 import { ServiceItem } from 'src/app/models/serviceItem';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Role } from 'src/app/models/role';
 
 @Component({
   selector: 'app-profile',
@@ -25,7 +26,7 @@ export class ProfileComponent implements OnInit {
 
   pastServices = <ServiceItem[]>[];
   futureServices = <ServiceItem[]>[];
-  
+
 
 
 
@@ -90,10 +91,18 @@ export class ProfileComponent implements OnInit {
 
   editUser() {
     let usr = this.loginService.currentUser;
-    usr.firstName = this.editForm.value['firstName'];
-    usr.lastName = this.editForm.value['lastName'];
-    usr.email = this.editForm.value['email'];
-    //usr.pictureURL = '/assets/profile-default.png';    TODO ADD picture (after S3 integration)
+
+    if (this.editForm.value['firstName'])
+      usr.firstName = this.editForm.value['firstName'];
+    if (usr.lastName = this.editForm.value['lastName'])
+      usr.lastName = this.editForm.value['lastName'];
+    if (usr.email = this.editForm.value['email'])
+      usr.email = this.editForm.value['email'];
+
+    usr.photo = ''; //TODO after S3
+    usr.password = 'replaceME';
+    usr.role = new Role();
+    usr.role.id = usr.roleId;
 
     this.loginService.updateUser(usr).subscribe(
       () => console.log(usr)
@@ -120,7 +129,7 @@ export class ProfileComponent implements OnInit {
     this.ngOnInit();
   }
 
-  selectService(s: ServiceItem){
+  selectService(s: ServiceItem) {
     this.selectedService = s;
   }
 
