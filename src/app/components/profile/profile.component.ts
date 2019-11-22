@@ -92,11 +92,11 @@ export class ProfileComponent implements OnInit {
   editUser() {
     let usr = this.loginService.currentUser;
 
-    if (this.editForm.value['firstName'])
+    if (this.editForm.value['firstName'] != '')
       usr.firstName = this.editForm.value['firstName'];
-    if (usr.lastName = this.editForm.value['lastName'])
+    if (this.editForm.value['lastName'] != '')
       usr.lastName = this.editForm.value['lastName'];
-    if (usr.email = this.editForm.value['email'])
+    if (this.editForm.value['email'] != '')
       usr.email = this.editForm.value['email'];
 
     usr.photo = ''; //TODO after S3
@@ -104,15 +104,19 @@ export class ProfileComponent implements OnInit {
     usr.role = new Role();
     usr.role.id = usr.roleId;
 
+    this.loginService.currentUser = usr;
+
     this.loginService.updateUser(usr).subscribe(
       () => console.log(usr)
     );
 
-    this.ngOnInit();
+    setTimeout(() => this.ngOnInit(), 200);
+
   }
 
   newVehicle() {
     let v = new Vehicle();
+    v.user = this.loginService.currentUser;
     v.name = this.vForm.value['name'];
     v.vin = this.vForm.value['vin'];
     v.year = this.vForm.value['year'];
