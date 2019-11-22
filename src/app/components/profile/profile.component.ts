@@ -132,7 +132,7 @@ export class ProfileComponent implements OnInit {
     
     setTimeout(()=>{
       this.ngOnInit();
-    },3);
+    },50);
   }
 
   selectService(s: ServiceItem) {
