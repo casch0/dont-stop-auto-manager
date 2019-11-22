@@ -42,6 +42,7 @@ export class LoginService {
             user => this.currentUser = user,
             err => console.log(err),
             () => console.log(this.currentUser));
+            localStorage.setItem('token', this.jwt);
           clearInterval(checkJWT);
         }
       }, 100);
@@ -62,8 +63,22 @@ export class LoginService {
   }
 
   checkOnline() {
-    if (!this.currentUser) {
+    if (!localStorage.getItem('token')) {
       this.router.navigate(['login']);
+    } else {
+      if(!this.httpOptions.headers.get('Authorization')){
+        this.httpOptions.headers = this.httpOptions.headers.append('Authorization', localStorage.getItem('token'));
+      }
+      
+      this.http.get<User>(`${this.usersUrl}/user`, this.httpOptions).subscribe(
+        user => this.currentUser = user,
+        err => console.log(err),
+        () => console.log(this.currentUser));
+
+        setTimeout(() => {
+          this.profileURL = '/profile/' + this.currentUser.id;
+          this.router.navigate([this.profileURL]);
+        }, 200);
     }
   }
 
