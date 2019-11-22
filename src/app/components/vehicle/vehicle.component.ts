@@ -84,20 +84,22 @@ export class VehicleComponent implements OnInit {
 
   updateVehicle() {
     let v = this.vehicle;
-    v.name = this.editVehicleForm.value['name'];
-    v.vin = this.editVehicleForm.value['vin'];
-    v.year = this.editVehicleForm.value['year'];
-    v.make = this.editVehicleForm.value['make'];
-    v.model = this.editVehicleForm.value['model'];
-    v.color = this.editVehicleForm.value['color'];
-    v.mileage = this.editVehicleForm.value['mileage'];
+    if(this.editVehicleForm.value['name']) v.name = this.editVehicleForm.value['name'];
+    if(this.editVehicleForm.value['vin']) v.vin = this.editVehicleForm.value['vin'];
+    if(this.editVehicleForm.value['year']) v.year = this.editVehicleForm.value['year'];
+    if(this.editVehicleForm.value['make']) v.make = this.editVehicleForm.value['make'];
+    if(this.editVehicleForm.value['model']) v.model = this.editVehicleForm.value['model'];
+    if(this.editVehicleForm.value['color']) v.color = this.editVehicleForm.value['color'];
+    if(this.editVehicleForm.value['mileage']) v.mileage = this.editVehicleForm.value['mileage'];
     //v.photoURL = '/assets/car-default.png'; //   TODO ADD picture (after S3 integration)
 
     this.vehicleService.updateVehicle(v).subscribe(
       () => console.log(v)
     );
 
-    this.ngOnInit();
+    setTimeout(()=>{
+      this.ngOnInit();
+    },50);
   }
 
   selectService(s: ServiceItem) {
@@ -123,7 +125,7 @@ export class VehicleComponent implements OnInit {
 
     setTimeout(()=>{
       this.ngOnInit();
-    }, 3);
+    }, 50);
     this.type = null;
   }
 

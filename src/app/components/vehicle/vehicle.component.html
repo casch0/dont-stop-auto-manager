@@ -87,7 +87,8 @@
                                 Service</button>
                         </div>
 
-                        <div *ngFor="let s of pastServices" (click)="serviceModal.show(); selectService(s);">
+                        <div *ngFor="let s of pastServices" (click)="serviceModal.show(); selectService(s);"
+                            class="pointer hoverable pservice">
                             <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.time | date:'short'}}</h5>
                             <h5 class="text-right">{{s?.name}}</h5>
                         </div>
@@ -121,20 +122,20 @@
                 <ul class="pl-0" style="list-style-type: none; text-align: left;">
                     <li>Vehicle</li>
                     <!--Should link to vehicle-->
-                    <li class="text-right">{{this.selectedService?.vehicle?.id}}</li>
+                    <li class="text-right">{{this.selectedService?.vehicleId}}</li>
                     <li>Type</li>
-                    <li class="text-right">{{this.selectedService?.type?.id | displayPipe}}</li>
+                    <li class="text-right">{{this.selectedService?.serviceTypeId | displayPipe}}</li>
                     <li>Cost</li>
                     <li class="text-right">{{this.selectedService?.cost}}</li>
                     <li>Date</li>
                     <li class="text-right">{{this.selectedService?.time | date:'short'}}</li>
                     <li>Tehcnician Note</li>
-                    <li class="text-right">{{this.selectedService?.techNote}}</li>
+                    <li class="text-right">{{this.selectedService?.technicianNote}}</li>
                     <li>User Note</li>
                     <li class="text-right">{{this.selectedService?.userNote}}</li>
                     <li>Technician</li>
                     <!--Should link to technician-->
-                    <li class="text-right">{{this.selectedService?.user?.id}}</li>
+                    <li class="text-right">{{this.selectedService?.userId}}</li>
                 </ul>
             </div>
             <div class="modal-footer">
@@ -220,7 +221,8 @@
                 <div class="modal-body mx-4">
 
                     <div class="md-form mb-4">
-                        <span>Type: </span><select [(ngModel)]="type" name="type" class="form-control" formControlName="type">
+                        <span>Type: </span><select [(ngModel)]="type" name="type" class="form-control"
+                            formControlName="type">
                             <option value="1">Maintenance</option>
                             <option value="2">Body Repair</option>
                             <option value="3">Mechanical Repair</option>

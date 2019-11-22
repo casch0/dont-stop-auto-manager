@@ -129,8 +129,10 @@ export class ProfileComponent implements OnInit {
     this.vehicleService.createVehicle(v).subscribe(
       () => console.log(v)
     );
-
-    this.ngOnInit();
+    
+    setTimeout(()=>{
+      this.ngOnInit();
+    },50);
   }
 
   selectService(s: ServiceItem) {
