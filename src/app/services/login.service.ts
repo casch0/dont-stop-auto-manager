@@ -75,15 +75,14 @@ export class LoginService {
       }
 
       this.http.get<User>(`${this.usersUrl}/user`, this.httpOptions).subscribe(
-        user => this.currentUser = user,
+        user => {
+          this.currentUser = user;
+          this.profileURL = '/profile/' + this.currentUser.id;
+          if (this.router.url.match("login"))
+            this.router.navigate([this.profileURL]);
+        },
         err => console.log(err),
         () => console.log(this.currentUser));
-
-      setTimeout(() => {
-        this.profileURL = '/profile/' + this.currentUser.id;
-        if (this.router.url.match("login"))
-          this.router.navigate([this.profileURL]);
-      }, 100);
     }
   }
 
