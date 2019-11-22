@@ -6,10 +6,14 @@
     <mdb-navbar-brand><a class="navbar-brand" routerLink={{this.loginService.profileURL}}
             routerLinkActive="router-link-active">Don't Stop!</a></mdb-navbar-brand>
 
+    <!-- Search form -->
+    <form [formGroup]="searchForm" class="form-inline">
+        <input formControlName="search" class="form-control" type="text" placeholder="Technician Search" aria-label="Search">
+    </form>
+
     <!-- Collapsible content -->
     <links>
         <ul class="navbar-nav nav-flex-icons ml-auto">
-
             <li class="nav-item avatar dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
                     mdbWavesEffect>

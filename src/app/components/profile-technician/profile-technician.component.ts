@@ -54,7 +54,7 @@ export class ProfileTechnicianComponent implements OnInit {
 
     let now = new Date().getTime();
     for (let s of this.serviceItems) {
-      let sTime = new Date(s.date).getTime();
+      let sTime = new Date(s.time).getTime();
       if (sTime >= now){
         this.futureServices.push(s);
       }
@@ -62,7 +62,7 @@ export class ProfileTechnicianComponent implements OnInit {
 
     for (let s of this.technicianServices) {
       if (s.vehicle_id == null){
-        if(s.date == null){
+        if(s.time == null){
           this.availableServiceItems.push(s);
         } else {
           this.requestedServices.push(s);

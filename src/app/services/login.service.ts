@@ -21,7 +21,11 @@ export class LoginService {
   };
 
 
+
   ngOnInit() {
+    this.httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
     this.currentUser = null;
   }
 
@@ -42,7 +46,7 @@ export class LoginService {
             user => this.currentUser = user,
             err => console.log(err),
             () => console.log(this.currentUser));
-            localStorage.setItem('token', this.jwt);
+          localStorage.setItem('token', this.jwt);
           clearInterval(checkJWT);
         }
       }, 100);
@@ -63,22 +67,23 @@ export class LoginService {
   }
 
   checkOnline() {
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token')) { //not logged in wiht JWT
       this.router.navigate(['login']);
-    } else {
-      if(!this.httpOptions.headers.get('Authorization')){
+    } else {                            //Logged in
+      if (!this.httpOptions.headers.get('Authorization')) {
         this.httpOptions.headers = this.httpOptions.headers.append('Authorization', localStorage.getItem('token'));
       }
-      
+
       this.http.get<User>(`${this.usersUrl}/user`, this.httpOptions).subscribe(
         user => this.currentUser = user,
         err => console.log(err),
         () => console.log(this.currentUser));
 
-        setTimeout(() => {
-          this.profileURL = '/profile/' + this.currentUser.id;
+      setTimeout(() => {
+        this.profileURL = '/profile/' + this.currentUser.id;
+        if (this.router.url.match("login"))
           this.router.navigate([this.profileURL]);
-        }, 200);
+      }, 100);
     }
   }
 
@@ -113,7 +118,7 @@ export class LoginService {
       .toPromise();
   }
 
-  async getServices(id: number){
+  async getServices(id: number) {
     return this.http.get<ServiceItem[]>(`${this.usersUrl}/${id}/servicereports`, this.httpOptions).toPromise();
   }
 }
