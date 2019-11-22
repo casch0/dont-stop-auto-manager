@@ -28,8 +28,12 @@
                 <!-- Section: Basic Info -->
                 <section class="card profile-card mb-4">
                     <div class="avatar z-depth-1-half">
-                        <img src={{vehicle?.photoURL}} alt="profile pic"
-                            class="img-responsive rounded fit-image img-fluid">
+                        <picture>
+                            <source srcset={{vehicle?.photoURL}}>
+                            <img src="assets/car-default.png" alt="profile pic"
+                                class="img-responsive rounded fit-image img-fluid">
+                        </picture>
+
                     </div>
                     <!-- Card content -->
 
@@ -41,7 +45,7 @@
                             <ul class="pl-0" style="list-style-type: none; text-align: left;">
                                 <li><a>Owner</a></li>
                                 <!--make this the name of the user-->
-                                <li class="text-right">{{vehicle?.user_id}}</li>
+                                <li class="text-right">{{vehicle?.user.id}}</li>
                                 <li>Year</li>
                                 <li class="text-right">{{vehicle?.year}}</li>
                                 <li>Make</li>
@@ -85,7 +89,7 @@
                         </div>
                     </div>
                 </section>
-                
+
             </div>
 
         </div>

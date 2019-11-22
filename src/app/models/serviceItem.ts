@@ -1,3 +1,5 @@
+import { Vehicle } from './vehicle';
+
 export class ServiceItem{
     id: number;
     name: String;
@@ -9,6 +11,7 @@ export class ServiceItem{
     vehicle_id: number;
     user_id: number;
     receiptURL: String;
+    vehicle: Vehicle; //for creating or updating
 
     constructor(){
         

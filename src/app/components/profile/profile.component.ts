@@ -61,8 +61,8 @@ export class ProfileComponent implements OnInit {
 
     this.profileID = this.router.url.match(/\d+$/)[0];
     this.user = <User>await this.loginService.getUser(this.profileID);
-    this.vehicles = <Vehicle[]>await this.vehicleService.getUserVehicles(this.user.id);
-    this.serviceItems = <ServiceItem[]>await this.SIS.getVehicleServices('1'); //replace with aggregate vehicle services post-integration
+    this.vehicles = <Vehicle[]>await this.loginService.getUserVehicles(this.user.id);
+    this.serviceItems = <ServiceItem[]>await this.loginService.getServices(this.user.id);
     this.populateServiceList();
 
 
@@ -126,4 +126,5 @@ export class ProfileComponent implements OnInit {
   selectService(s: ServiceItem){
     this.selectedService = s;
   }
+
 }

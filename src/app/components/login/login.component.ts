@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     usr.lastName = this.signupForm.value['lastName'];
     usr.email = this.signupForm.value['email'];
     usr.password = this.signupForm.value['password'];
-    usr.pictureURL = '/assets/profile-default.png';
+    usr.photo = '/assets/profile-default.png';
     
     this.loginService.addUser(usr).subscribe(
       () => console.log(usr)

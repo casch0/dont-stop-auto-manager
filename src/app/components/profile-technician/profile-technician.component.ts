@@ -43,7 +43,7 @@ export class ProfileTechnicianComponent implements OnInit {
 
     this.profileID = this.router.url.match(/\d+$/)[0];
     this.user = <User>await this.loginService.getUser(this.profileID);
-    this.serviceItems = <ServiceItem[]>await this.SIS.getVehicleServices('1'); //replace with technician's upcoming services
+    this.serviceItems = <ServiceItem[]>await this.loginService.getServices(this.user.id); //replace with technician's upcoming services
     this.technicianServices = <ServiceItem[]> await this.SIS.getTechnicianServices(this.profileID); //replace with technician's upcoming services
     this.populateServiceList();
   }
