@@ -20,7 +20,7 @@
                         <button type="button" class="btn btn-light" (click)="editModal.show()">Edit Profile</button>
 
                         <!--Technician Buttons-->
-                        <div *ngIf="this.loginService.currentUser?.role_id == 2">
+                        <div *ngIf="this.loginService.currentUser?.roleId == 2">
                             <button type="button" class="btn btn-light" (click)="newService.show()">New Service</button>
                         </div>
 
