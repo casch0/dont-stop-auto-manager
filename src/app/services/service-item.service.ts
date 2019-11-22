@@ -26,11 +26,7 @@ export class ServiceItemService {
   ) { }  
 
   async getServiceItem(id: String){
-    return this.http.get<ServiceItem>(`${this.servicesURL}/${id}`, this.httpOptions).toPromise();
-  }
-
-  async getTechnicianServices(id: String){
-    return this.http.get<ServiceItem[]>(`${this.servicesURL}`, this.httpOptions).toPromise();
+    return this.http.get<ServiceItem>(`${this.servicesURL}/${id}`, this.ls.httpOptions).toPromise();
   }
 
   createServiceItem(s: ServiceItem): Observable<ServiceItem> {

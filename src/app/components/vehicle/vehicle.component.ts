@@ -111,7 +111,7 @@ export class VehicleComponent implements OnInit {
     s.userNote = this.addPastServiceForm.value['note'];
     s.type = new Type();
     s.type.id = this.type;
-    let d = new Date(this.addPastServiceForm.value['date']);
+    let d = new Date(this.addPastServiceForm.value['date']);    
     d.setHours(d.getHours() + 4);
     s.time = d;
     s.vehicle = this.vehicle;

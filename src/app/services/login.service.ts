@@ -82,14 +82,14 @@ export class LoginService {
             this.router.navigate([this.profileURL]);
         },
         err => console.log(err),
-        () => console.log(this.currentUser));
+        () => console.log(this.currentUser)); 
     }
   }
 
   checkUserType() {
-    // if (this.currentUser.role.id == 2) {
-    //   this.router.navigate(['/technician/' + this.currentUser.id]);
-    // }
+    if (this.currentUser.roleId == 2) {
+      this.router.navigate(['/technician/' + this.currentUser.id]);
+    }
   }
 
   async getUser(id: String) {

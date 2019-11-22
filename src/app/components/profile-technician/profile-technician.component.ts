@@ -19,7 +19,7 @@ export class ProfileTechnicianComponent implements OnInit {
   user: User;
   profileID: String;
   serviceItems = <ServiceItem[]>[];
-  technicianServices = <ServiceItem[]>[];
+
   availableServiceItems = <ServiceItem[]>[];
   requestedServices = <ServiceItem[]>[];
   
@@ -43,8 +43,7 @@ export class ProfileTechnicianComponent implements OnInit {
 
     this.profileID = this.router.url.match(/\d+$/)[0];
     this.user = <User>await this.loginService.getUser(this.profileID);
-    this.serviceItems = <ServiceItem[]>await this.loginService.getServices(this.user.id); //replace with technician's upcoming services
-    this.technicianServices = <ServiceItem[]> await this.SIS.getTechnicianServices(this.profileID); //replace with technician's upcoming services
+    this.serviceItems = <ServiceItem[]>await this.loginService.getServices(this.user.id);
     this.populateServiceList();
   }
 
@@ -60,7 +59,7 @@ export class ProfileTechnicianComponent implements OnInit {
       }
     }
 
-    for (let s of this.technicianServices) {
+    for (let s of this.serviceItems) {
       if (s.vehicle_id == null){
         if(s.time == null){
           this.availableServiceItems.push(s);

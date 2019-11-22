@@ -7,8 +7,11 @@
             <div class="col-xl-3 col-lg-4 col-md-4">
                 <!-- Section: Basic Info -->
                 <section class="card mb-4 text-center">
-                    <img src={{user?.pictureURL}} alt="profile pic"
-                        class="mx-auto d-block z-depth-1-half rounded-circle fit-image">
+                    <picture>
+                        <source srcset={{user?.photo}}>
+                        <img src="assets/profile-default.png" alt="profile pic"
+                            class="mx-auto d-block z-depth-1-half rounded-circle fit-image">
+                    </picture>
                     <!-- Card content -->
                     <div class="card-body">
                         <!-- Title -->
@@ -25,7 +28,6 @@
                         </div>
 
                     </div>
-
                 </section>
                 <!-- Section: Basic Info -->
 

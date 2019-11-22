@@ -8,17 +8,17 @@
                 <!-- Section: Basic Info -->
                 <section class="card mb-4 text-center">
                     <picture>
-                            <source srcset={{user?.photo}}>
-                            <img src="assets/profile-default.png" alt="profile pic"
+                        <source srcset={{user?.photo}}>
+                        <img src="assets/profile-default.png" alt="profile pic"
                             class="mx-auto d-block z-depth-1-half rounded-circle fit-image">
                     </picture>
-                    
+
                     <!-- Card content -->
                     <div class="card-body">
                         <!-- Title -->
                         <h4 class="card-title"><strong>{{user?.firstName}} {{user?.lastName}}</strong></h4>
                     </div>
-                    
+
                     <!--Owner-->
                     <div *ngIf="this.loginService.currentUser?.id == this.profileID">
                         <button type="button" class="btn btn-light" (click)="editModal.show()">Edit Profile</button>
@@ -50,9 +50,10 @@
                         <div class="view view-cascade overlay">
                             <picture>
                                 <source srcset={{v?.photoURL}}>
-                                    <img src="assets/car-default.png" class="mx-auto d-block z-depth-1-half fit-image" alt="">
+                                <img src="assets/car-default.png" class="mx-auto d-block z-depth-1-half fit-image"
+                                    alt="">
                             </picture>
-                            
+
                         </div>
 
                         <!-- Card content -->
@@ -66,18 +67,6 @@
 
                 </div>
                 <!-- Card row -->
-
-                <!-- Pagination -->
-                <nav class="my-2 d-flex justify-content-center white pt-2 rounded">
-
-                    <ul class="pagination pagination-circle pg-blue mb-0">
-                        <!-- Numbers -->
-                        <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a></li>
-                        <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
-                    </ul>
-                </nav>
-                <!-- Pagination -->
-
             </div>
             <!-- Grid column -->
 
