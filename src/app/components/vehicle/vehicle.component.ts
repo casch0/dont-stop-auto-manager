@@ -61,6 +61,7 @@ export class VehicleComponent implements OnInit {
     this.vehicleID = this.router.url.match(/\d+$/)[0];
     this.vehicle = <Vehicle>await this.vehicleService.getVehicle(this.vehicleID);
     this.serviceItems = <ServiceItem[]>await this.vehicleService.getVehicleServices(this.vehicleID);
+    console.log(this.serviceItems);
     this.populateServiceList();
 
   }
@@ -72,6 +73,7 @@ export class VehicleComponent implements OnInit {
     let now = new Date().getTime();
     for (let s of this.serviceItems) {
       let sTime = new Date(s.time).getTime();
+      console.log(s.time);
       if (sTime <= now) {
         this.pastServices.push(s);
       } else {
@@ -109,7 +111,9 @@ export class VehicleComponent implements OnInit {
     s.userNote = this.addPastServiceForm.value['note'];
     s.type = new Type();
     s.type.id = this.type;
-    s.time = this.addPastServiceForm.value['date'];
+    let d = new Date(this.addPastServiceForm.value['date']);
+    d.setHours(d.getHours() + 4);
+    s.time = d;
     s.vehicle = this.vehicle;
     console.log(s);
 

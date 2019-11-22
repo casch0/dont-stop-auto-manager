@@ -13,7 +13,7 @@
                         <h4 class="text-center mb-2">Upcoming Services</h4>
 
                         <div *ngFor="let s of futureServices" (click)="serviceModal.show(); selectService(s);">
-                            <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.date | date:'short'}}</h5>
+                            <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.time | date:'short'}}</h5>
                             <h5 class="text-right">{{s?.name}}</h5>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                         </div>
 
                         <div *ngFor="let s of pastServices" (click)="serviceModal.show(); selectService(s);">
-                            <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.date | date:'short'}}</h5>
+                            <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.time | date:'short'}}</h5>
                             <h5 class="text-right">{{s?.name}}</h5>
                         </div>
                     </div>
@@ -121,20 +121,20 @@
                 <ul class="pl-0" style="list-style-type: none; text-align: left;">
                     <li>Vehicle</li>
                     <!--Should link to vehicle-->
-                    <li class="text-right">{{this.selectedService?.vehicle_id}}</li>
+                    <li class="text-right">{{this.selectedService?.vehicle?.id}}</li>
                     <li>Type</li>
-                    <li class="text-right">{{this.selectedService?.type_id | displayPipe}}</li>
+                    <li class="text-right">{{this.selectedService?.type?.id | displayPipe}}</li>
                     <li>Cost</li>
                     <li class="text-right">{{this.selectedService?.cost}}</li>
                     <li>Date</li>
-                    <li class="text-right">{{this.selectedService?.date | date:'short'}}</li>
+                    <li class="text-right">{{this.selectedService?.time | date:'short'}}</li>
                     <li>Tehcnician Note</li>
                     <li class="text-right">{{this.selectedService?.techNote}}</li>
                     <li>User Note</li>
                     <li class="text-right">{{this.selectedService?.userNote}}</li>
                     <li>Technician</li>
                     <!--Should link to technician-->
-                    <li class="text-right">{{this.selectedService?.user_id}}</li>
+                    <li class="text-right">{{this.selectedService?.user?.id}}</li>
                 </ul>
             </div>
             <div class="modal-footer">
@@ -233,7 +233,7 @@
                     </div>
 
                     <div class="md-form mb-4">
-                        <input type="text" id="ServiceCost" class="form-control validate" min="0.01" step="0.01"
+                        <input type="number" id="ServiceCost" class="form-control validate" min="0.01" step="0.01"
                             placeholder="Service Cost" formControlName="cost">
                     </div>
 
