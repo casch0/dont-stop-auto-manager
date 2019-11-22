@@ -1,11 +1,13 @@
 import { Vehicle } from './vehicle';
+import { Type } from 'src/app/models/type';
 
 export class ServiceItem{
     id: number;
     name: String;
     type_id: number;
+    type: Type;
     cost: number;
-    date: Date;
+    time: Date;
     techNote: String;
     userNote: String;
     vehicle_id: number;

@@ -80,7 +80,7 @@ export class ProfileComponent implements OnInit {
 
     let now = new Date().getTime();
     for (let s of this.serviceItems) {
-      let sTime = new Date(s.date).getTime();
+      let sTime = new Date(s.time).getTime();
       if (sTime <= now) {
         this.pastServices.push(s);
       } else {

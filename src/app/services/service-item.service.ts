@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { ServiceItem } from '../models/serviceItem';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoginService } from './login.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceItemService {
   serviceList: ServiceItem[]; //users vehicles
-  servicesURL = 'http://localhost:8080/servicereports';
+  servicesURL = 'http://localhost:8080/servicereports/';
   
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,5 +31,9 @@ export class ServiceItemService {
 
   async getTechnicianServices(id: String){
     return this.http.get<ServiceItem[]>(`${this.servicesURL}`, this.httpOptions).toPromise();
+  }
+
+  createServiceItem(s: ServiceItem): Observable<ServiceItem> {
+    return this.http.post<ServiceItem>(this.servicesURL, s, this.ls.httpOptions);
   }
 }

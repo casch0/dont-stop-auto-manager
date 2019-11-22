@@ -6,6 +6,7 @@ import { ServiceItem } from 'src/app/models/serviceItem';
 import { Vehicle } from 'src/app/models/vehicle';
 import { ServiceItemService } from 'src/app/services/service-item.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Type } from 'src/app/models/type';
 
 @Component({
   selector: 'app-vehicle',
@@ -14,11 +15,13 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class VehicleComponent implements OnInit {
   editVehicleForm: FormGroup;
+  addPastServiceForm: FormGroup;
 
   vehicle: Vehicle;
   vehicleID: String;
   serviceItems: ServiceItem[];
   selectedService: ServiceItem;
+  type: number;
 
   pastServices = <ServiceItem[]>[];
   futureServices = <ServiceItem[]>[];
@@ -28,7 +31,8 @@ export class VehicleComponent implements OnInit {
     private router: Router,
     private vehicleService: VehicleService,
     private SIS: ServiceItemService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private serviceItemService: ServiceItemService
   ) { }
 
   async ngOnInit() {
@@ -44,6 +48,15 @@ export class VehicleComponent implements OnInit {
       // photoURL: 'assets/car-default.png',
     });
 
+    this.addPastServiceForm = this.formBuilder.group({
+      name: '',
+      type: null,
+      cost: null,
+      date: null,
+      note: '',
+      receiptURL: ''
+    });
+
     this.loginService.checkOnline();
     this.vehicleID = this.router.url.match(/\d+$/)[0];
     this.vehicle = <Vehicle>await this.vehicleService.getVehicle(this.vehicleID);
@@ -55,10 +68,10 @@ export class VehicleComponent implements OnInit {
   populateServiceList() {
     this.pastServices = [];
     this.futureServices = [];
-    
+
     let now = new Date().getTime();
     for (let s of this.serviceItems) {
-      let sTime = new Date(s.date).getTime();
+      let sTime = new Date(s.time).getTime();
       if (sTime <= now) {
         this.pastServices.push(s);
       } else {
@@ -85,7 +98,29 @@ export class VehicleComponent implements OnInit {
     this.ngOnInit();
   }
 
-  selectService(s: ServiceItem){
+  selectService(s: ServiceItem) {
     this.selectedService = s;
   }
+
+  addPastService() {
+    let s = new ServiceItem;
+    s.name = this.addPastServiceForm.value['name'];
+    s.cost = this.addPastServiceForm.value['cost'];
+    s.userNote = this.addPastServiceForm.value['note'];
+    s.type = new Type();
+    s.type.id = this.type;
+    s.time = this.addPastServiceForm.value['date'];
+    s.vehicle = this.vehicle;
+    console.log(s);
+
+    this.serviceItemService.createServiceItem(s).subscribe(
+      () => console.log(s)
+    );
+
+    setTimeout(()=>{
+      this.ngOnInit();
+    }, 3);
+    this.type = null;
+  }
+
 }
