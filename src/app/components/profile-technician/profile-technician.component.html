@@ -174,12 +174,14 @@
             <div class="modal-footer">
                 <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
                     (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
+                    <button *ngIf="this.loginService.currentUser?.id == 1" type="button" mdbBtn color="primary" class="waves-light" aria-label="Close"
+                    (click)="serviceModal.hide(); requestService()" mdbWavesEffect>Request Service</button>
             </div>
         </div>
     </div>
 </div>
 
-<!--New Service Modal-->
+<!--New Past Service Modal-->
 <div mdbModal #newService="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -191,23 +193,41 @@
                 <h4 class="modal-title w-100 font-weight-bold">New Service</h4>
             </div>
 
-            <div class="modal-body mx-4">
-                <div class="md-form mb-4">
-                    <i class="fas fa-user prefix grey-text"></i>
-                    <input type="text" id="ServiceType" class="form-control validate">
-                    <label data-error="wrong" data-success="right" for="form3">Service Type</label>
-                </div>
-
+            <form [formGroup]="addNewServiceForm">
                 <div class="modal-body mx-4">
-                    <textarea id="note" class="md-textarea form-control" rows="3"></textarea>
-                    <label for="form75">Note</label>
-                </div>
 
-            </div>
+                    <div class="md-form mb-4">
+                        <span>Type: </span><select [(ngModel)]="type" name="type" class="form-control"
+                            formControlName="type">
+                            <option value="1">Maintenance</option>
+                            <option value="2">Body Repair</option>
+                            <option value="3">Mechanical Repair</option>
+                            <option value="4">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <input type="text" class="form-control" placeholder="Service Name" formControlName="name">
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <input type="number" id="ServiceCost" class="form-control validate" min="0.01" step="0.01"
+                            placeholder="Service Cost" formControlName="cost">
+                    </div>
+
+                    <div class="modal-body mx-4">
+                        <textarea id="technote" class="md-textarea form-control" rows="3" placeholder="Service Description"
+                            formControlName="technote"></textarea>
+                    </div>
+
+                </div>
+            </form>
+
             <div class="modal-footer">
                 <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
                     (click)="newService.hide()" mdbWavesEffect>Close</button>
-                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                    (click)="addNewService()" (click)="newService.hide()">Submit</button>
             </div>
         </div>
     </div>

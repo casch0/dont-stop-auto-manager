@@ -81,7 +81,7 @@ export class LoginService {
           if (this.router.url.match("login"))
             this.router.navigate([this.profileURL]);
         },
-        err => console.log(err),
+        err => this.router.navigate(["login"]),
         () => console.log(this.currentUser)); 
     }
   }
@@ -120,4 +120,9 @@ export class LoginService {
   async getServices(id: number) {
     return this.http.get<ServiceItem[]>(`${this.usersUrl}/${id}/servicereports`, this.httpOptions).toPromise();
   }
+  
+  async getTechServices(id: number) {
+    return this.http.get<ServiceItem[]>(`${this.usersUrl}/${id}/technicianreports`, this.httpOptions).toPromise();
+  }
+  
 }
