@@ -41,16 +41,16 @@
             <div class="col-xl-3 col-lg-4 col-md-4 text-center">
 
                 <!-- Card row -->
-                <div *ngFor="let v of vehicles" class="card-deck">
+                <div *ngFor="let v of vehicles" class="card-deck pointer">
 
                     <!-- Card -->
-                    <div class="card vh-20% mb-2" routerLink='{{getVehicleURL(v)}}'>
+                    <div class="card vh-20% mb-2 hoverable" routerLink='{{getVehicleURL(v)}}'>
 
                         <!-- Card image -->
                         <div class="view view-cascade overlay">
                             <picture>
                                 <source srcset={{v?.photoURL}}>
-                                    <img src="assets/car-default.png" class="mx-auto d-block z-depth-1-half fit-image" alt="">
+                                    <img src="assets/car-default.png" class="mx-auto hoverable d-block z-depth-1-half fit-image pointer" alt="">
                             </picture>
                             
                         </div>
@@ -67,17 +67,6 @@
                 </div>
                 <!-- Card row -->
 
-                <!-- Pagination -->
-                <nav class="my-2 d-flex justify-content-center white pt-2 rounded">
-
-                    <ul class="pagination pagination-circle pg-blue mb-0">
-                        <!-- Numbers -->
-                        <li class="page-item active"><a class="page-link waves-effect waves-effect">1</a></li>
-                        <li class="page-item"><a class="page-link waves-effect waves-effect">2</a></li>
-                    </ul>
-                </nav>
-                <!-- Pagination -->
-
             </div>
             <!-- Grid column -->
 
@@ -90,7 +79,7 @@
 
                         <h4 class="text-center mb-2">Calendar</h4>
 
-                        <div *ngFor="let s of futureServices" (click)="serviceModal.show(); selectService(s);">
+                        <div *ngFor="let s of futureServices" (click)="serviceModal.show(); selectService(s);" class="pointer">
                             <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.date | date:'short'}}</h5>
                             <h5 class="text-right">{{s?.name}}</h5>
                         </div>

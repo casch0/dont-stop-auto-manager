@@ -123,7 +123,7 @@ export class VehicleComponent implements OnInit {
 
     setTimeout(()=>{
       this.ngOnInit();
-    }, 3);
+    }, 50);
     this.type = null;
   }
 
