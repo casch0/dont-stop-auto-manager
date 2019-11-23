@@ -99,7 +99,7 @@ export class VehicleComponent implements OnInit {
 
     setTimeout(()=>{
       this.ngOnInit();
-    },50);
+    },100);
   }
 
   selectService(s: ServiceItem) {
@@ -125,7 +125,7 @@ export class VehicleComponent implements OnInit {
 
     setTimeout(()=>{
       this.ngOnInit();
-    }, 50);
+    }, 100);
     this.type = null;
   }
 

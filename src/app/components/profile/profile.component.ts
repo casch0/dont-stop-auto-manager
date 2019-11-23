@@ -27,9 +27,6 @@ export class ProfileComponent implements OnInit {
   pastServices = <ServiceItem[]>[];
   futureServices = <ServiceItem[]>[];
 
-
-
-
   constructor(
     private loginService: LoginService,
     private vehicleService: VehicleService,
@@ -61,12 +58,21 @@ export class ProfileComponent implements OnInit {
     });
 
     this.profileID = this.router.url.match(/\d+$/)[0];
-    this.user = <User>await this.loginService.getUser(this.profileID);
-    this.vehicles = <Vehicle[]>await this.loginService.getUserVehicles(this.user.id);
-    this.serviceItems = <ServiceItem[]>await this.loginService.getServices(this.user.id);
-    this.populateServiceList();
+    this.loginService.getUser(this.profileID).subscribe(
+      u => this.user = u
+    );
 
+    this.loginService.getServices(this.profileID).subscribe(
+      items => this.serviceItems = items
+    );
 
+    this.loginService.getUserVehicles(this.profileID).subscribe(
+      items => this.vehicles = items
+    );
+    
+    setTimeout(() => {
+      this.populateServiceList();
+    }, 100);
   }
 
   getVehicleURL(v: Vehicle) {
@@ -129,10 +135,10 @@ export class ProfileComponent implements OnInit {
     this.vehicleService.createVehicle(v).subscribe(
       () => console.log(v)
     );
-    
-    setTimeout(()=>{
+
+    setTimeout(() => {
       this.ngOnInit();
-    },50);
+    }, 100);
   }
 
   selectService(s: ServiceItem) {

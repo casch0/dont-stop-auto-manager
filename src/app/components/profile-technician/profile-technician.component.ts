@@ -38,6 +38,7 @@ export class ProfileTechnicianComponent implements OnInit {
   async ngOnInit() {
     this.loginService.checkOnline();
 
+
     this.editForm = this.formBuilder.group({
       firstName: '',
       lastName: '',
@@ -52,14 +53,19 @@ export class ProfileTechnicianComponent implements OnInit {
     });
 
     this.profileID = this.router.url.match(/\d+$/)[0];
-    this.user = <User>await this.loginService.getUser(this.profileID);
-    this.serviceItems = <ServiceItem[]>await this.loginService.getTechServices(this.user.id);
+    this.loginService.getUser(this.profileID).subscribe(
+      u => this.user = u
+    );
+    this.loginService.getTechServices(this.profileID).subscribe(
+      items => this.serviceItems = items
+    );
+
 
     setTimeout(() => {
       console.log(this.serviceItems);
       this.populateServiceList();
-    }, 50)
-    
+    }, 200)
+
   }
 
   populateServiceList() {
@@ -73,7 +79,7 @@ export class ProfileTechnicianComponent implements OnInit {
       if (s.time == null) {
         if (s.vehicle_id == 0) {
           this.availableServiceItems.push(s);
-        } else if (!s.userNote){
+        } else if (!s.userNote) {
           this.requestedServices.push(s);
         }
       } else {
@@ -125,11 +131,11 @@ export class ProfileTechnicianComponent implements OnInit {
     this.type = null;
   }
 
-  requestService(){
+  requestService() {
     console.log(this.selectedService);
   }
 
-  deleteService(s: ServiceItem){
+  deleteService(s: ServiceItem) {
     this.SIS.deleteService(s);
   }
 }

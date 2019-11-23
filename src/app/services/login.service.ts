@@ -14,19 +14,15 @@ export class LoginService {
   currentUser: User;
   usersUrl = 'http://localhost:8080/user';
   profileURL: String;
-  jwt: string;
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers:
+      new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': '1' })
   };
 
 
 
   ngOnInit() {
-    this.httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    this.currentUser = null;
   }
 
   constructor(
@@ -35,18 +31,27 @@ export class LoginService {
   ) { }
 
   async login(email: String, pass: String) {
-    this.loginUser(email, pass); //assign JWT
+    const url = this.usersUrl + '/login';
+
+    this.http.post(url, {
+      'email': email,
+      'password': pass
+    }, { responseType: 'text' }).subscribe(
+      token => localStorage.setItem('token', token),
+      () => window.alert("Invalid Credentials"),
+    );
 
     const checkJWT =
       setInterval(() => {
-        if (!(this.jwt == '' || this.jwt == undefined || this.jwt == null)) {
-          console.log(this.jwt);
-          this.httpOptions.headers = this.httpOptions.headers.append('Authorization', this.jwt);
+        let jwt = localStorage.getItem('token');
+        if (jwt) {
+          console.log(jwt);
+          this.httpOptions.headers = this.httpOptions.headers.set('Authorization', jwt);
+          console.log(this.httpOptions.headers.get('Authorization'))
           this.http.get<User>(`${this.usersUrl}/user`, this.httpOptions).subscribe(
             user => this.currentUser = user,
             err => console.log(err),
             () => console.log(this.currentUser));
-          localStorage.setItem('token', this.jwt);
           clearInterval(checkJWT);
         }
       }, 100);
@@ -63,41 +68,45 @@ export class LoginService {
     setTimeout(() => {
       clearInterval(checkJWT);
       clearInterval(checkUser);
+      console.log('login timeout');
     }, 2000);
   }
 
   checkOnline() {
-    if (!localStorage.getItem('token')) { //not logged in wiht JWT
+    console.log('is user online? ...');
+    if (!localStorage.getItem('token') || localStorage.getItem('token') == '1') { //not logged in wiht JWT
+      console.log('NOT ONLINE');
       this.router.navigate(['login']);
     } else {                            //Logged in
-      if (!this.httpOptions.headers.get('Authorization')) {
-        this.httpOptions.headers = this.httpOptions.headers.append('Authorization', localStorage.getItem('token'));
-      }
+      let jwt = localStorage.getItem('token');
 
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization', jwt);
+      console.log(jwt);
       this.http.get<User>(`${this.usersUrl}/user`, this.httpOptions).subscribe(
-        user => {
-          this.currentUser = user;
+        user => this.currentUser = user,
+        err => console.log(err),
+        () => {
+          console.log(this.currentUser);
           this.profileURL = '/profile/' + this.currentUser.id;
-          if (this.router.url.match("login"))
+          if (this.router.url.match('login'))
             this.router.navigate([this.profileURL]);
-        },
-        err => this.router.navigate(["login"]),
-        () => console.log(this.currentUser)); 
+        });
+      console.log(this.currentUser);
     }
   }
 
   checkUserType() {
-    if (this.currentUser.roleId == 2) {
-      this.router.navigate(['/technician/' + this.currentUser.id]);
-    }
+    // if (this.currentUser.roleId == 2) {
+    //   this.router.navigate(['/technician/' + this.currentUser.id]);
+    // }
   }
 
-  async getUser(id: String) {
-    return this.http.get<User>(`${this.usersUrl}/${id}`, this.httpOptions).toPromise();
+  getUser(id: String) {
+    return this.http.get<User>(`${this.usersUrl}/${id}`, this.httpOptions);
   }
 
-  async getUserVehicles(id: number) {
-    return this.http.get<Vehicle[]>(`${this.usersUrl}/${id}/vehicles`, this.httpOptions).toPromise();
+  getUserVehicles(id: String) {
+    return this.http.get<Vehicle[]>(`${this.usersUrl}/${id}/vehicles`, this.httpOptions);
   }
 
   addUser(user: User): Observable<User> {
@@ -108,21 +117,12 @@ export class LoginService {
     return this.http.put(this.usersUrl, user, this.httpOptions);
   }
 
-  async loginUser(email: String, password: String) {
-    const url = this.usersUrl + '/login';
-    this.jwt = await this.http.post(url, {
-      email,
-      password
-    }, { responseType: 'text' })
-      .toPromise();
+  getServices(id: String) {
+    return this.http.get<ServiceItem[]>(`${this.usersUrl}/${id}/servicereports`, this.httpOptions);
   }
 
-  async getServices(id: number) {
-    return this.http.get<ServiceItem[]>(`${this.usersUrl}/${id}/servicereports`, this.httpOptions).toPromise();
+  getTechServices(id: String) {
+    return this.http.get<ServiceItem[]>(`${this.usersUrl}/${id}/technicianreports`, this.httpOptions);
   }
-  
-  async getTechServices(id: number) {
-    return this.http.get<ServiceItem[]>(`${this.usersUrl}/${id}/technicianreports`, this.httpOptions).toPromise();
-  }
-  
+
 }

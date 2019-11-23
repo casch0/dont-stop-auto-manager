@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
     this.loginService.httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    localStorage.removeItem('token');
+    localStorage.clear();
   }
 
   gotoVehicle(id: number){
