@@ -125,4 +125,8 @@ export class LoginService {
     return this.http.get<ServiceItem[]>(`${this.usersUrl}/${id}/technicianreports`, this.httpOptions);
   }
 
+  searchTechnicians(u: User){
+    return this.http.post<User[]>(`${this.usersUrl}/technicians`, u, this.httpOptions);
+  }
+
 }

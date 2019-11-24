@@ -7,9 +7,10 @@
             routerLinkActive="router-link-active">Don't Stop!</a></mdb-navbar-brand>
 
     <!-- Search form -->
-    <form [formGroup]="searchForm" class="form-inline">
-        <input formControlName="search" class="form-control" type="text" placeholder="Technician Search" aria-label="Search">
-    </form>
+
+    <input [(ngModel)]="searchParameters" type="text" placeholder="Technician Search" aria-label="Search">
+    <button class="btn btn-primary p-1" (click)="search(searchParameters)">Search</button>
+
 
     <!-- Collapsible content -->
     <links>
