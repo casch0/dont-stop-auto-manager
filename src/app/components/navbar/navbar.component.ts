@@ -5,7 +5,6 @@ import { VehicleService } from 'src/app/services/vehicle.service';
 import { HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { User } from 'src/app/models/user';
-import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 
 @Component({
   selector: 'app-navbar',
@@ -39,6 +38,7 @@ export class NavbarComponent implements OnInit {
   }
 
   search(s: String) {
+    
     let user = new User();
     user.firstName = <String>s.split(' ')[0];
     user.lastName = <String>s.split(' ')[1];

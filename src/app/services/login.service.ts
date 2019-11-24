@@ -126,7 +126,7 @@ export class LoginService {
   }
 
   searchTechnicians(u: User){
-    return this.http.post<User[]>(`${this.usersUrl}/technicians`, u, this.httpOptions);
+    return this.http.post<User[]>(`${this.usersUrl}/technicians/`, u, this.httpOptions);
   }
 
 }
