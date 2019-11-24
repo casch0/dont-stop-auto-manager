@@ -38,8 +38,6 @@ export class ProfileComponent implements OnInit {
   async ngOnInit() {
     this.loginService.checkOnline();
 
-    this.loginService.checkUserType();
-
     this.editForm = this.formBuilder.group({
       firstName: '',
       lastName: '',
@@ -71,6 +69,7 @@ export class ProfileComponent implements OnInit {
     );
     
     setTimeout(() => {
+      this.loginService.checkUserType(this.user);
       this.populateServiceList();
     }, 100);
   }

@@ -43,25 +43,33 @@
 
                         <h4 class="text-center mb-2">Available Services</h4>
 
-                        <div *ngFor="let s of availableServiceItems" (click)="serviceModal.show(); selectService(s);">
-                            <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.time | date:'short'}}</h5>
-                            <h5 class="text-right">{{s?.name}}</h5>
-                        </div>
+                        <ul *ngFor="let s of availableServiceItems" class="px-1 pointer rounded blue lighten-4"
+                            (click)="serviceModal.show(); selectService(s)"
+                            style="list-style-type: none; text-align: left;">
+                            <li>{{s?.name}}</li>
+                            <li class="text-right">{{s?.cost}}</li>
+                        </ul>
 
                     </div>
                 </section>
                 <!-- Section: Experience -->
 
                 <!-- Section: Experience -->
-                <section class="card mb-4">
+                <section class="card mb-4" *ngIf="this.loginService.currentUser?.id == this.profileID">
                     <div class="container card-body">
 
                         <h4 class="text-center mb-2">Service Requests</h4>
 
-                        <div *ngFor="let s of requestedServices" (click)="serviceModal.show(); selectService(s);">
-                            <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.time | date:'short'}}</h5>
-                            <h5 class="text-right">{{s?.name}}</h5>
-                        </div>
+                        <ul *ngFor="let s of requestedServices" class="px-1 pointer rounded blue lighten-4"
+                            (click)="selectService(s)"
+                            style="list-style-type: none; text-align: left;">
+                            <li>{{s?.name}} for vehicle {{s?.vehicleId}}
+                                <button class="btn btn-dark p-0" (click)="this.acceptRequest(selectedService)">Accept</button>
+                            </li>
+                            <li class="text-right">
+                                <input type="date" id="ServiceTime" placeholder="Service Date" [(ngModel)]="this.serviceDate">
+                            </li>
+                        </ul>
 
                     </div>
                 </section>
@@ -157,25 +165,39 @@
                     <!--Should link to vehicle-->
                     <li class="text-right">{{this.selectedService?.vehicle_id}}</li>
                     <li>Type</li>
-                    <li class="text-right">{{this.selectedService?.type_id | displayPipe}}</li>
+                    <li class="text-right">{{this.selectedService?.serviceTypeId | displayPipe}}</li>
                     <li>Cost</li>
                     <li class="text-right">{{this.selectedService?.cost}}</li>
                     <li>Date</li>
                     <li class="text-right">{{this.selectedService?.time | date:'short'}}</li>
                     <li>Tehcnician Note</li>
-                    <li class="text-right">{{this.selectedService?.techNote}}</li>
-                    <li>User Note</li>
-                    <li class="text-right">{{this.selectedService?.userNote}}</li>
-                    <li>Technician</li>
-                    <!--Should link to technician-->
-                    <li class="text-right">{{this.selectedService?.user_id}}</li>
+                    <li class="text-right">{{this.selectedService?.technicianNote}}</li>
                 </ul>
             </div>
+
+            <form [formGroup]="addreqServiceForm">
+                <div class="modal-body mx-4">
+
+                    <div class="modal-body mx-4">
+                        <textarea id="userNote" class="md-textarea form-control" rows="3" placeholder="Description"
+                            formControlName="userNote"></textarea>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <input type="number" id="vid" class="form-control validate" min="1" step="1"
+                            placeholder="Vehicle ID" formControlName="vid">
+                    </div>
+
+                </div>
+            </form>
+
             <div class="modal-footer">
-                <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close"
-                    (click)="serviceModal.hide()" mdbWavesEffect>Close</button>
-                    <button *ngIf="this.loginService.currentUser?.id == 1" type="button" mdbBtn color="primary" class="waves-light" aria-label="Close"
-                    (click)="serviceModal.hide(); requestService()" mdbWavesEffect>Request Service</button>
+                <button *ngIf="this.loginService.currentUser?.id == this.profileID" type="button" class='btn btn-danger'
+                    (click)="serviceModal.hide(); deleteService(selectedService);">Delete</button>
+                <button *ngIf="this.loginService.currentUser?.roleId == 1" type="button" mdbBtn color="primary"
+                    class="waves-light" aria-label="Close"
+                    (click)="serviceModal.hide(); requestService(selectedService);" mdbWavesEffect>Request
+                    Service</button>
             </div>
         </div>
     </div>
@@ -216,8 +238,8 @@
                     </div>
 
                     <div class="modal-body mx-4">
-                        <textarea id="technote" class="md-textarea form-control" rows="3" placeholder="Service Description"
-                            formControlName="technote"></textarea>
+                        <textarea id="technote" class="md-textarea form-control" rows="3"
+                            placeholder="Service Description" formControlName="technote"></textarea>
                     </div>
 
                 </div>

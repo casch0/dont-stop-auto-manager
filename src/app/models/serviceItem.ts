@@ -5,14 +5,14 @@ import { User } from './user';
 export class ServiceItem{
     id: number;
     name: String;
-    type_id: number;
+    serviceTypeId: number;
     type: Type;
     cost: number;
     time: Date;
     technicianNote: String;
     userNote: String;
-    vehicle_id: number;
-    user_id: number;
+    vehicleId: number;
+    userId: number;
     receiptURL: String;
     vehicle: Vehicle; //for creating or updating
     user: User;

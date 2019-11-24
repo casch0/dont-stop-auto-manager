@@ -95,10 +95,10 @@ export class LoginService {
     }
   }
 
-  checkUserType() {
-    // if (this.currentUser.roleId == 2) {
-    //   this.router.navigate(['/technician/' + this.currentUser.id]);
-    // }
+  checkUserType(user: User) {
+    if (user.roleId == 2) {
+      this.router.navigate(['/technician/' + user.id]);
+    }
   }
 
   getUser(id: String) {

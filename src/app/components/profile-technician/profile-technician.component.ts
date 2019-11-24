@@ -7,6 +7,7 @@ import { ServiceItem } from 'src/app/models/serviceItem';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Type } from 'src/app/models/type';
 import { Vehicle } from 'src/app/models/vehicle';
+import { VehicleService } from 'src/app/services/vehicle.service';
 
 @Component({
   selector: 'app-profile-technician',
@@ -16,8 +17,11 @@ import { Vehicle } from 'src/app/models/vehicle';
 export class ProfileTechnicianComponent implements OnInit {
   editForm: FormGroup;
   addNewServiceForm: FormGroup;
+  addreqServiceForm: FormGroup;
+
   selectedService: ServiceItem;
   type: number;
+  serviceDate: Date;
 
   user: User;
   profileID: String;
@@ -32,7 +36,8 @@ export class ProfileTechnicianComponent implements OnInit {
     private loginService: LoginService,
     private SIS: ServiceItemService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private vService: VehicleService
   ) { }
 
   async ngOnInit() {
@@ -52,7 +57,13 @@ export class ProfileTechnicianComponent implements OnInit {
       technote: '',
     });
 
+    this.addreqServiceForm = this.formBuilder.group({
+      userNote: '',
+      vid: ''
+    });
+
     this.profileID = this.router.url.match(/\d+$/)[0];
+
     this.loginService.getUser(this.profileID).subscribe(
       u => this.user = u
     );
@@ -77,9 +88,9 @@ export class ProfileTechnicianComponent implements OnInit {
 
     for (let s of this.serviceItems) {
       if (s.time == null) {
-        if (s.vehicle_id == 0) {
+        if (s.vehicleId == 0) {
           this.availableServiceItems.push(s);
-        } else if (!s.userNote) {
+        } else if (!s.time) {
           this.requestedServices.push(s);
         }
       } else {
@@ -127,15 +138,39 @@ export class ProfileTechnicianComponent implements OnInit {
 
     setTimeout(() => {
       this.ngOnInit();
-    }, 50);
+    }, 100);
     this.type = null;
   }
 
-  requestService() {
-    console.log(this.selectedService);
+  async requestService(s: ServiceItem) {
+    s.userNote = this.addreqServiceForm.value['userNote'];
+    s.vehicle = await this.vService.getVehicle(this.addreqServiceForm.value['vid']);
+    s.user = this.user;
+    s.type = new Type();
+    s.type.id = s.serviceTypeId;
+
+    setTimeout(() => this.SIS.createServiceItem(s).subscribe(thing => console.log(thing)), 100);
   }
 
-  deleteService(s: ServiceItem) {
+  deleteService(s: ServiceItem) { //does nothing yet
+    console.log('deleting: ' + s.name);
     this.SIS.deleteService(s);
+  }
+
+  async acceptRequest(s: ServiceItem) {
+    if (this.serviceDate) {
+      console.log(this.serviceDate);
+      s.time = this.serviceDate;
+      // s.vehicle = await this.vService.getVehicle(this.addreqServiceForm.value['vid']);
+      s.user = this.user;
+      s.type = new Type();
+      s.type.id = s.serviceTypeId;
+
+      let d = new Date(this.serviceDate);
+      d.setHours(d.getHours() + 4);
+      s.time = d;
+
+      this.SIS.updateService(s).subscribe(thing => console.log(thing));
+    }
   }
 }

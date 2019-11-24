@@ -32,8 +32,12 @@ export class ServiceItemService {
   createServiceItem(s: ServiceItem): Observable<ServiceItem> {
     return this.http.post<ServiceItem>(this.servicesURL, s, this.ls.httpOptions);
   }
+  
+  updateService(s: ServiceItem): Observable<ServiceItem> {
+    return this.http.put<ServiceItem>(this.servicesURL, s, this.ls.httpOptions);
+  }
 
   deleteService(s: ServiceItem){
-    // return this.http.delete<ServiceItem>(this.servicesURL, s, this.ls.httpOptions, );
+    // return this.http.delete<ServiceItem>(this.servicesURL, s, this.ls.httpOptions);
   }
 }
