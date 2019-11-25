@@ -38,4 +38,8 @@ export class VehicleService {
   async getVehicleServices(id: String){
     return this.http.get<ServiceItem[]>(`${this.vehiclesUrl}/${id}/servicereports`, this.ls.httpOptions).toPromise();
   }
+
+  uploadPhoto(vId: number, photo : File){
+    return this.http.post(`${this.vehiclesUrl}/${vId}/photo`, photo, this.ls.httpOptions);
+  }
 }

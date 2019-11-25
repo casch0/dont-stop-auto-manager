@@ -61,13 +61,14 @@
                         <h4 class="text-center mb-2">Service Requests</h4>
 
                         <ul *ngFor="let s of requestedServices" class="px-1 pointer rounded blue lighten-4"
-                            (click)="selectService(s)"
-                            style="list-style-type: none; text-align: left;">
+                            (click)="selectService(s)" style="list-style-type: none; text-align: left;">
                             <li>{{s?.name}} for vehicle {{s?.vehicleId}}
-                                <button class="btn btn-dark p-0" (click)="this.acceptRequest(selectedService)">Accept</button>
+                                <button class="btn btn-dark p-0"
+                                    (click)="this.acceptRequest(selectedService)">Accept</button>
                             </li>
                             <li class="text-right">
-                                <input type="date" id="ServiceTime" placeholder="Service Date" [(ngModel)]="this.serviceDate">
+                                <input type="date" id="ServiceTime" placeholder="Service Date"
+                                    [(ngModel)]="this.serviceDate">
                             </li>
                         </ul>
 
@@ -142,6 +143,7 @@
                         (click)="editUser(); editModal.hide()" mdbWavesEffect>Submit</button>
                 </div>
             </form>
+            <input type="file" placeholder="Profile Picture" (change)="onFileChange($event)" />
         </div>
     </div>
 </div>
@@ -163,7 +165,7 @@
                 <ul class="pl-0" style="list-style-type: none; text-align: left;">
                     <li>Vehicle</li>
                     <!--Should link to vehicle-->
-                    <li class="text-right">{{this.selectedService?.vehicle_id}}</li>
+                    <li class="text-right">{{this.selectedService?.vehicleId}}</li>
                     <li>Type</li>
                     <li class="text-right">{{this.selectedService?.serviceTypeId | displayPipe}}</li>
                     <li>Cost</li>
@@ -172,6 +174,11 @@
                     <li class="text-right">{{this.selectedService?.time | date:'short'}}</li>
                     <li>Tehcnician Note</li>
                     <li class="text-right">{{this.selectedService?.technicianNote}}</li>
+                    <li>User Note</li>
+                    <li class="text-right">{{this.selectedService?.userNote}}</li>
+                    <li>Technician</li>
+                    <!--Should link to technician-->
+                    <li class="text-right">{{this.selectedService?.userId}}</li>
                 </ul>
             </div>
 

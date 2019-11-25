@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Type } from 'src/app/models/type';
 import { Vehicle } from 'src/app/models/vehicle';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { Role } from 'src/app/models/role';
 
 @Component({
   selector: 'app-profile-technician',
@@ -18,6 +19,8 @@ export class ProfileTechnicianComponent implements OnInit {
   editForm: FormGroup;
   addNewServiceForm: FormGroup;
   addreqServiceForm: FormGroup;
+
+  photo: File;
 
   selectedService: ServiceItem;
   type: number;
@@ -104,16 +107,37 @@ export class ProfileTechnicianComponent implements OnInit {
 
   editUser() {
     let usr = this.loginService.currentUser;
-    usr.firstName = this.editForm.value['firstName'];
-    usr.lastName = this.editForm.value['lastName'];
-    usr.email = this.editForm.value['email'];
-    //usr.pictureURL = '/assets/profile-default.png';    TODO ADD picture (after S3 integration)
 
-    this.loginService.updateUser(usr).subscribe(
-      () => console.log(usr)
-    );
+    if (this.editForm.value['firstName'] != '')
+      usr.firstName = this.editForm.value['firstName'];
+    if (this.editForm.value['lastName'] != '')
+      usr.lastName = this.editForm.value['lastName'];
+    if (this.editForm.value['email'] != '')
+      usr.email = this.editForm.value['email'];
 
-    this.ngOnInit();
+    usr.photo = ''; //TODO after S3
+    usr.password = 'replaceME';
+    usr.role = new Role();
+    usr.role.id = usr.roleId;
+
+    let p: String;
+
+    console.log(this.photo);
+
+    this.loginService.uploadPhoto(usr.id, this.photo).subscribe((data: User) => {
+      usr.photo = data.photo;
+      this.loginService.currentUser = usr;
+      this.loginService.updateUser(usr).subscribe(data => console.log(data));
+    });
+
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 500);
+  }
+
+  onFileChange(event) {
+    this.photo = event.target.files[0];
+    console.log(this.photo);
   }
 
   selectService(s: ServiceItem) {

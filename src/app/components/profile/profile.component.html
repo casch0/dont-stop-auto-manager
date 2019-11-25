@@ -81,7 +81,7 @@
 
                         <div *ngFor="let s of futureServices" (click)="serviceModal.show(); selectService(s);"
                             class="pointer">
-                            <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.date | date:'short'}}</h5>
+                            <h5 class="pl-1 pr-1 rounded text-left blue lighten-4">{{s?.time | date:'short'}}</h5>
                             <h5 class="text-right">{{s?.name}}</h5>
                         </div>
 
@@ -130,7 +130,7 @@
                         <input type="email" class="form-control" placeholder="Email" formControlName="email" />
                     </div>
 
-                    
+
 
 
                 </div>
@@ -140,8 +140,8 @@
                 </div>
             </form>
 
-                    <input type="file" placeholder="Profile Picture" (change)="onFileChange($event)"/>
-    
+            <input type="file" placeholder="Profile Picture" (change)="onFileChange($event)" />
+
         </div>
     </div>
 </div>
@@ -162,20 +162,20 @@
                 <ul class="pl-0" style="list-style-type: none; text-align: left;">
                     <li>Vehicle</li>
                     <!--Should link to vehicle-->
-                    <li class="text-right">{{this.selectedService?.vehicle_id}}</li>
+                    <li class="text-right">{{this.selectedService?.vehicleId}}</li>
                     <li>Type</li>
-                    <li class="text-right">{{this.selectedService?.type_id | displayPipe}}</li>
+                    <li class="text-right">{{this.selectedService?.serviceTypeId | displayPipe}}</li>
                     <li>Cost</li>
                     <li class="text-right">{{this.selectedService?.cost}}</li>
                     <li>Date</li>
-                    <li class="text-right">{{this.selectedService?.date | date:'short'}}</li>
+                    <li class="text-right">{{this.selectedService?.time | date:'short'}}</li>
                     <li>Tehcnician Note</li>
-                    <li class="text-right">{{this.selectedService?.techNote}}</li>
+                    <li class="text-right">{{this.selectedService?.technicianNote}}</li>
                     <li>User Note</li>
                     <li class="text-right">{{this.selectedService?.userNote}}</li>
                     <li>Technician</li>
                     <!--Should link to technician-->
-                    <li class="text-right">{{this.selectedService?.user_id}}</li>
+                    <li class="text-right">{{this.selectedService?.userId}}</li>
                 </ul>
             </div>
             <div class="modal-footer">

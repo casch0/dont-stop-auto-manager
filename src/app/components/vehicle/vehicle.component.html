@@ -29,7 +29,7 @@
                 <section class="card profile-card mb-4">
                     <div class="avatar z-depth-1-half">
                         <picture>
-                            <source srcset={{vehicle?.photoURL}}>
+                            <source srcset={{vehicle?.photo}}>
                             <img src="assets/car-default.png" alt="profile pic"
                                 class="img-responsive rounded fit-image img-fluid">
                         </picture>
@@ -201,6 +201,8 @@
                         (click)="updateVehicle(); editVehicleModal.hide()" mdbWavesEffect>Submit</button>
                 </div>
             </form>
+            <input type="file" placeholder="Profile Picture" (change)="onFileChange($event)" />
+
         </div>
     </div>
 </div>

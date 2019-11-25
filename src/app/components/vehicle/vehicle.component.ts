@@ -17,6 +17,8 @@ export class VehicleComponent implements OnInit {
   editVehicleForm: FormGroup;
   addPastServiceForm: FormGroup;
 
+  photo: File;
+
   vehicle: Vehicle;
   vehicleID: String;
   serviceItems: ServiceItem[];
@@ -93,9 +95,17 @@ export class VehicleComponent implements OnInit {
     if(this.editVehicleForm.value['mileage']) v.mileage = this.editVehicleForm.value['mileage'];
     //v.photoURL = '/assets/car-default.png'; //   TODO ADD picture (after S3 integration)
 
-    this.vehicleService.updateVehicle(v).subscribe(
-      () => console.log(v)
-    );
+    let p: String;
+
+    console.log(this.photo);
+
+    this.vehicleService.uploadPhoto(v.id, this.photo).subscribe((data: Vehicle) => {
+      v.photo = data.photo;
+      this.vehicle = v;
+      this.vehicleService.updateVehicle(v).subscribe(
+        data => console.log(data)
+      );
+    });
 
     setTimeout(()=>{
       this.ngOnInit();
@@ -127,6 +137,11 @@ export class VehicleComponent implements OnInit {
       this.ngOnInit();
     }, 100);
     this.type = null;
+  }
+
+  onFileChange(event) {
+    this.photo = event.target.files[0];
+    console.log(this.photo);
   }
 
 }

@@ -15,6 +15,7 @@ export class Vehicle{
     photoURL: String;
     serviceReportIds: number[];
     user: User;
+    photo: String;
 
     constructor(){
     }
