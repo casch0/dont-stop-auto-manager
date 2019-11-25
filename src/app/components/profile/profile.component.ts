@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit {
   vForm: FormGroup;
   selectedService: ServiceItem;
 
+  photo: File;
+
   user: User;
   profileID: String;
   vehicles: Vehicle[];
@@ -41,7 +43,7 @@ export class ProfileComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       firstName: '',
       lastName: '',
-      email: '',
+      email: ''
     });
 
     this.vForm = this.formBuilder.group({
@@ -67,11 +69,11 @@ export class ProfileComponent implements OnInit {
     this.loginService.getUserVehicles(this.profileID).subscribe(
       items => this.vehicles = items
     );
-    
+
     setTimeout(() => {
       this.loginService.checkUserType(this.user);
       this.populateServiceList();
-    }, 100);
+    }, 500);
   }
 
   getVehicleURL(v: Vehicle) {
@@ -109,14 +111,19 @@ export class ProfileComponent implements OnInit {
     usr.role = new Role();
     usr.role.id = usr.roleId;
 
-    this.loginService.currentUser = usr;
+    let p: String;
 
-    this.loginService.updateUser(usr).subscribe(
-      () => console.log(usr)
-    );
+    console.log(this.photo);
 
-    setTimeout(() => this.ngOnInit(), 200);
+    this.loginService.uploadPhoto(usr.id, this.photo).subscribe((data: User) => {
+      usr.photo = data.photo;
+      this.loginService.currentUser = usr;
+      this.loginService.updateUser(usr).subscribe(data => console.log(data));
+    });
 
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 500);
   }
 
   newVehicle() {
@@ -142,6 +149,11 @@ export class ProfileComponent implements OnInit {
 
   selectService(s: ServiceItem) {
     this.selectedService = s;
+  }
+
+  onFileChange(event) {
+    this.photo = event.target.files[0];
+    console.log(this.photo);
   }
 
 }

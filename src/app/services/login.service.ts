@@ -129,4 +129,7 @@ export class LoginService {
     return this.http.post<User[]>(`${this.usersUrl}/technicians/`, u, this.httpOptions);
   }
 
+  uploadPhoto(userId: number, photo : File){
+    return this.http.post(`${this.usersUrl}/${userId}/photo`, photo, this.httpOptions);
+  }
 }
